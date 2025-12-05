@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spencer</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <h1>Spencer</h1>
+            <nav>
+                <ul>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#gallery">Gallery</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h2>Fast, Reliable Mobile Repair Services</h2>
+            <p>Screens, Batteries, Water Damage, and more. Quality accessories for all major brands.</p>
+            <a href="#contact" class="btn">Get a Quote Today</a>
+        </div>
+    </section>
+
+    <section id="services" class="section-padding">
+        <div class="container">
+            <h2>Our Services & Sales</h2>
+            <div class="service-grid">
+                <div class="service-item">
+                    <i class="fas fa-mobile-alt"></i>
+                    <h3>Screen Repair</h3>
+                    <p>High-quality screen replacements for smartphones and tablets.</p>
+                </div>
+                <div class="service-item">
+                    <i class="fas fa-battery-three-quarters"></i>
+                    <h3>Battery Replacement</h3>
+                    <p>Quick and safe battery swaps to bring your device back to life.</p>
+                </div>
+                <div class="service-item">
+                    <i class="fas fa-water"></i>
+                    <h3>Water Damage</h3>
+                    <p>Expert diagnostics and repairs for liquid-damaged devices.</p>
+                </div>
+                <div class="service-item">
+                    <i class="fas fa-headphones"></i>
+                    <h3>Accessories Sales</h3>
+                    <p>Cases, chargers, headphones, and more—all with a quality guarantee.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery" class="section-padding bg-light">
+        <div class="container">
+            <h2>Our Recent Work & Products</h2>
+            <div class="gallery-grid" id="image-gallery">
+                <div><p>Loading Images...</p></div>
+                <div><p>Loading Images...</p></div>
+                <div><p>Loading Images...</p></div>
+            </div>
+            <p class="gallery-note">**Note:** Add your images to the `/images/` folder and update the `imageNames` array in `script.js`.</p>
+        </div>
+    </section>
+
+    <section id="testimonials" class="section-padding">
+        <div class="container">
+            <h2>What Our Customers Say</h2>
+            <div class="testimonial-grid" id="testimonial-container">
+                <div class="testimonial-card">
+                    <p class="quote">"Fastest screen replacement I've ever had. Highly recommend this service!"</p>
+                    <p class="author">- Sarah M.</p>
+                </div>
+                <div class="testimonial-card">
+                    <p class="quote">"Bought a durable case here. Great quality and fair price. Excellent customer service."</p>
+                    <p class="author">- John D.</p>
+                </div>
+            </div>
+            <p class="testimonial-note">**Note:** Add new testimonials by updating the `testimonialsData` array in `script.js`.</p>
+        </div>
+    </section>
+
+    <section id="contact" class="section-padding bg-light">
+        <div class="container">
+            <h2>Get In Touch</h2>
+            <div class="contact-info">
+                <p><i class="fas fa-map-marker-alt"></i> **Address:** 123 Tech Lane, City, State 12345</p>
+                <p><i class="fas fa-phone"></i> **Phone:** (555) 123-4567</p>
+                <p><i class="fas fa-envelope"></i> **Email:** contact@[yourbusiness].com</p>
+                <p><i class="fas fa-clock"></i> **Hours:** Mon - Fri: 9am - 6pm | Sat: 10am - 4pm</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 [Your Business Name]. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="data.js"></script>
+</body>
+</html>

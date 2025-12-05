@@ -1,0 +1,330 @@
+/* General Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f4f4f4;
+}
+
+.container {
+    width: 85%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+
+.section-padding {
+    padding: 60px 0;
+}
+
+h1, h2, h3 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+h2 {
+    text-align: center;
+    font-size: 2.2em;
+    margin-bottom: 40px;
+}
+
+/* Header & Navigation */
+header {
+    background: #007bff; /* Primary Brand Color */
+    color: white;
+    padding: 10px 0;
+    border-bottom: 3px solid #0056b3;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    padding: 15px 15px;
+    display: block;
+    transition: background-color 0.3s;
+}
+
+nav ul li a:hover {
+    background-color: #0056b3;
+}
+
+/* Hero Section */
+.hero {
+    background: url('hero-bg.jpg') no-repeat center center/cover; /* Replace with your own image */
+    background-color: #2c3e50;
+    color: white;
+    text-align: center;
+    padding: 100px 20px;
+}
+
+.hero h2 {
+    font-size: 3em;
+    margin-bottom: 10px;
+    color: white;
+}
+
+.hero p {
+    font-size: 1.2em;
+    margin-bottom: 30px;
+}
+
+.btn {
+    display: inline-block;
+    background: #ffc107; /* Secondary Accent Color */
+    color: #333;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+.btn:hover {
+    background: #e0a800;
+}
+
+/* Services Section */
+.service-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    text-align: center;
+}
+
+.service-item {
+    background: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.service-item i {
+    font-size: 3em;
+    color: #007bff;
+    margin-bottom: 15px;
+}
+
+/* Gallery Section */
+.bg-light {
+    background-color: #f9f9f9;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.gallery-item {
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s;
+}
+
+.gallery-item img:hover {
+    transform: scale(1.05);
+}
+
+.gallery-note {
+    text-align: center;
+    margin-top: 20px;
+    font-style: italic;
+    color: #666;
+}
+
+/* Testimonials Section */
+.testimonial-grid {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.testimonial-card {
+    background: #fff;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    max-width: 400px;
+    position: relative;
+}
+
+.testimonial-card .quote {
+    font-style: italic;
+    margin-bottom: 15px;
+    position: relative;
+    padding: 10px;
+}
+
+.testimonial-card .author {
+    text-align: right;
+    font-weight: bold;
+    color: #007bff;
+}
+
+.testimonial-note {
+    text-align: center;
+    margin-top: 20px;
+    font-style: italic;
+    color: #666;
+}
+
+/* Contact Section */
+.contact-info {
+    text-align: center;
+    font-size: 1.1em;
+}
+
+.contact-info p {
+    margin-bottom: 10px;
+}
+
+.contact-info i {
+    color: #007bff;
+    margin-right: 10px;
+}
+
+/* Footer */
+footer {
+    background: #333;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+    .container {
+        width: 90%;
+    }
+
+    header .container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    nav ul {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    nav ul li {
+        border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+    nav ul li a {
+        padding: 10px;
+    }
+
+    .hero {
+        padding: 60px 20px;
+    }
+
+    .hero h2 {
+        font-size: 2.5em;
+    }
+
+    
+}
+
+/* Update: Header & Navigation */
+header {
+    background: #007AA5; /* Primary Blue - Trust & Tech */
+    color: white;
+    padding: 10px 0;
+    border-bottom: 3px solid #FF8A00; /* Accent Orange Line */
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+/* Ensure title stands out */
+header h1 {
+    color: #FFFFFF;
+}
+
+header .container {
+    /* Existing flex properties */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0;
+}
+
+nav ul li a {
+    color: #FFFFFF;
+    text-decoration: none;
+    padding: 15px 15px;
+    display: block;
+    transition: background-color 0.3s;
+}
+
+nav ul li a:hover {
+    background-color: #005A7A; /* Darker shade of Primary Blue for hover */
+}
+
+/* Update: Hero Section (using the same blue/orange) */
+.hero {
+    /* Use a dark color if no background image is set */
+    background-color: #2c3e50; 
+    color: white;
+    text-align: center;
+    padding: 100px 20px;
+}
+
+/* Update: Call-to-Action Button */
+.btn {
+    display: inline-block;
+    background: #FF8A00; /* Accent Orange */
+    color: white; /* White text on orange button */
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+.btn:hover {
+    background: #E67A00; /* Slightly darker orange on hover */
+}
+
+/* Update: Services Icons */
+.service-item i {
+    font-size: 3em;
+    color: #007AA5; /* Primary Blue for icons */
+    margin-bottom: 15px;
+}
+
+/* Update: Light Background Section */
+.bg-light {
+    background-color: #F9F9F9;
+}
