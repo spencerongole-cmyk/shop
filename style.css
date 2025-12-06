@@ -8,8 +8,8 @@
 body {
     font-family: Arial, sans-serif;
     line-height: 1.6;
-    color: #333;
-    background-color: #f4f4f4;
+    color: #333333; /* Text Dark */
+    background-color: #f84a06;
 }
 
 .container {
@@ -25,7 +25,7 @@ body {
 
 h1, h2, h3 {
     margin-bottom: 20px;
-    color: #333;
+    color: #333333;
 }
 
 h2 {
@@ -34,15 +34,19 @@ h2 {
     margin-bottom: 40px;
 }
 
-/* Header & Navigation */
+/* Header & Navigation (Updated with Blue/Orange Palette) */
 header {
-    background: #007bff; /* Primary Brand Color */
+    background: #007AA5; /* Primary Blue - Trust & Tech */
     color: white;
     padding: 10px 0;
-    border-bottom: 3px solid #0056b3;
+    border-bottom: 3px solid #FF8A00; /* Accent Orange Line */
     position: sticky;
     top: 0;
     z-index: 1000;
+}
+
+header h1 {
+    color: #FFFFFF;
 }
 
 header .container {
@@ -58,7 +62,7 @@ nav ul {
 }
 
 nav ul li a {
-    color: white;
+    color: #FFFFFF;
     text-decoration: none;
     padding: 15px 15px;
     display: block;
@@ -66,12 +70,12 @@ nav ul li a {
 }
 
 nav ul li a:hover {
-    background-color: #0056b3;
+    background-color: #005A7A; /* Darker shade of Primary Blue for hover */
 }
 
 /* Hero Section */
 .hero {
-    background: url('hero-bg.jpg') no-repeat center center/cover; /* Replace with your own image */
+    background: url('hero-bg.jpg') no-repeat center center/cover; /* Use your image here */
     background-color: #2c3e50;
     color: white;
     text-align: center;
@@ -89,10 +93,11 @@ nav ul li a:hover {
     margin-bottom: 30px;
 }
 
+/* Call-to-Action Button */
 .btn {
     display: inline-block;
-    background: #ffc107; /* Secondary Accent Color */
-    color: #333;
+    background: #FF8A00; /* Accent Orange */
+    color: white;
     padding: 10px 20px;
     text-decoration: none;
     border-radius: 5px;
@@ -101,7 +106,7 @@ nav ul li a:hover {
 }
 
 .btn:hover {
-    background: #e0a800;
+    background: #E67A00; /* Slightly darker orange on hover */
 }
 
 /* Services Section */
@@ -121,40 +126,75 @@ nav ul li a:hover {
 
 .service-item i {
     font-size: 3em;
-    color: #007bff;
+    color: #007AA5; /* Primary Blue for icons */
     margin-bottom: 15px;
 }
 
 /* Gallery Section */
 .bg-light {
-    background-color: #f9f9f9;
+    background-color: #F9F9F9; /* Neutral Light */
 }
 
-.gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 20px;
-}
+/* --- CAROUSEL STYLING --- */
 
-.gallery-item {
-    overflow: hidden;
+.carousel-container {
+    position: relative;
+    overflow: hidden; 
+    max-width: 900px;
+    margin: 0 auto 30px auto;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
 }
 
-.gallery-item img {
+.carousel-track {
+    display: flex;
+    transition: transform 0.4s ease-in-out; 
+}
+
+.carousel-slide {
+    min-width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.carousel-slide img {
     width: 100%;
-    height: 300px;
-    object-fit: cover;
+    height: 450px; 
+    object-fit: cover; 
     display: block;
-    transition: transform 0.3s;
 }
 
-.gallery-item img:hover {
-    transform: scale(1.05);
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 1.5em;
+    z-index: 10;
+    transition: background 0.3s;
 }
 
-.gallery-note {
+.carousel-btn:hover {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+.prev-btn {
+    left: 10px;
+    border-radius: 0 5px 5px 0;
+}
+
+.next-btn {
+    right: 10px;
+    border-radius: 5px 0 0 5px;
+}
+
+.gallery-note, .testimonial-note {
     text-align: center;
     margin-top: 20px;
     font-style: italic;
@@ -188,14 +228,7 @@ nav ul li a:hover {
 .testimonial-card .author {
     text-align: right;
     font-weight: bold;
-    color: #007bff;
-}
-
-.testimonial-note {
-    text-align: center;
-    margin-top: 20px;
-    font-style: italic;
-    color: #666;
+    color: #007AA5; /* Primary Blue */
 }
 
 /* Contact Section */
@@ -209,13 +242,13 @@ nav ul li a:hover {
 }
 
 .contact-info i {
-    color: #007bff;
+    color: #007AA5;
     margin-right: 10px;
 }
 
 /* Footer */
 footer {
-    background: #333;
+    background: #333333;
     color: white;
     text-align: center;
     padding: 20px 0;
@@ -231,100 +264,14 @@ footer {
         flex-direction: column;
         text-align: center;
     }
+    /* ... (rest of media queries for nav/hero) ... */
+    nav ul { flex-direction: column; width: 100%; }
+    nav ul li { border-top: 1px solid rgba(255,255,255,0.1); }
+    nav ul li a { padding: 10px; }
+    .hero { padding: 60px 20px; }
+    .hero h2 { font-size: 2.5em; }
 
-    nav ul {
-        flex-direction: column;
-        width: 100%;
+    .carousel-slide img {
+        height: 300px; /* Adjust height for smaller screens */
     }
-
-    nav ul li {
-        border-top: 1px solid rgba(255,255,255,0.1);
-    }
-
-    nav ul li a {
-        padding: 10px;
-    }
-
-    .hero {
-        padding: 60px 20px;
-    }
-
-    .hero h2 {
-        font-size: 2.5em;
-    }
-
-    
-}
-
-/* Update: Header & Navigation */
-header {
-    background: #007AA5; /* Primary Blue - Trust & Tech */
-    color: white;
-    padding: 10px 0;
-    border-bottom: 3px solid #FF8A00; /* Accent Orange Line */
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-}
-
-/* Ensure title stands out */
-header h1 {
-    color: #FFFFFF;
-}
-
-header .container {
-    /* Existing flex properties */
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0;
-}
-
-nav ul li a {
-    color: #FFFFFF;
-    text-decoration: none;
-    padding: 15px 15px;
-    display: block;
-    transition: background-color 0.3s;
-}
-
-nav ul li a:hover {
-    background-color: #005A7A; /* Darker shade of Primary Blue for hover */
-}
-
-/* Update: Hero Section (using the same blue/orange) */
-.hero {
-    /* Use a dark color if no background image is set */
-    background-color: #2c3e50; 
-    color: white;
-    text-align: center;
-    padding: 100px 20px;
-}
-
-/* Update: Call-to-Action Button */
-.btn {
-    display: inline-block;
-    background: #FF8A00; /* Accent Orange */
-    color: white; /* White text on orange button */
-    padding: 10px 20px;
-    text-decoration: none;
-    border-radius: 5px;
-    font-weight: bold;
-    transition: background 0.3s;
-}
-
-.btn:hover {
-    background: #E67A00; /* Slightly darker orange on hover */
-}
-
-/* Update: Services Icons */
-.service-item i {
-    font-size: 3em;
-    color: #007AA5; /* Primary Blue for icons */
-    margin-bottom: 15px;
-}
-
-/* Update: Light Background Section */
-.bg-light {
-    background-color: #F9F9F9;
 }
