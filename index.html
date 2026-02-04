@@ -1067,6 +1067,16 @@
             .whatsapp-float {
                 right: 12px;
             }
+            {
+    section:first-of-type {
+        height: 65px;
+    }
+
+    body {
+        padding-top: 65px;
+    }
+}
+
 
             .logo {
                 padding: 10px 0;
@@ -1326,10 +1336,24 @@
             0% { transform: translateX(0); }
             100% { transform: translateX(-100%); }
         }
-        /* FIX: prevent sticky header from hiding sections */
+        /* FIX: prevent sticky <div id="header"> from hiding sections */
         section[id] {
             scroll-margin-top: 160px;  /* matches full header height */
         }
+        /* FIX HEADER WOBBLE */
+section:first-of-type {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    height: 80px;
+    background: #ffffff;
+    z-index: 9999;
+}
+body {
+    padding-top: 80px;
+    overflow-x: hidden;
+}
+
        
     </style>
 </head>
@@ -1965,7 +1989,7 @@
             <div class="facility-item" onclick="openFacilityPopup(
                 'AC & Non-AC Rooms',
                 'Comfortable AC and Non-AC rooms available for devotees.',
-                'Images/ac-room.jpg'
+                'D:/Janardhan/SVSGNT/Images/ac-room.jpg'
             )">
                 <div class="facility-icon"><i class="fas fa-snowflake"></i></div>
                 <div>
@@ -1978,7 +2002,7 @@
             <div class="facility-item" onclick="openFacilityPopup(
                 'Entertainment',
                 'Color Television in every room with cable connection.',
-                'Images/tv-room.jpg'
+                'D:/Janardhan/SVSGNT/Images/tv-room.jpg'
             )">
                 <div class="facility-icon"><i class="fas fa-tv"></i></div>
                 <div>
@@ -1991,7 +2015,7 @@
             <div class="facility-item" onclick="openFacilityPopup(
                 '24 Hours Hot Water',
                 '24×7 hot water facility in all rooms.',
-                'Images/water-heater.jpg'
+                'D:/Janardhan/SVSGNT/Images/water-heater.jpg'
             )">
                 <div class="facility-icon"><i class="fas fa-hot-tub"></i></div>
                 <div>
@@ -2004,7 +2028,7 @@
             <div class="facility-item" onclick="openFacilityPopup(
                 'Mineral Water',
                 'Clean and safe mineral drinking water on every floor.',
-                'Images/mineral-water.jpg'
+                'D:/Janardhan/SVSGNT/Images/mineral-water.jpg'
             )">
                 <div class="facility-icon"><i class="fas fa-tint"></i></div>
                 <div>
@@ -2017,7 +2041,7 @@
             <div class="facility-item" onclick="openFacilityPopup(
                 'Lift Facility',
                 '24×7 lift facility for senior citizens and luggage.',
-                'Images/lift.jpg'
+                'D:/Janardhan/SVSGNT/Images/lift.jpg'
             )">
                 <div class="facility-icon"><i class="fas fa-elevator"></i></div>
                 <div>
@@ -2030,7 +2054,7 @@
             <div class="facility-item" onclick="openFacilityPopup(
                 'Flexible Check-out',
                 '24 hours flexible checkout with SMS support.',
-                'checkout.avif'
+                'D:/Janardhan/SVSGNT/Images/checkout.avif'
             )">
                 <div class="facility-icon"><i class="fas fa-clock"></i></div>
                 <div>
