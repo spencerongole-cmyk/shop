@@ -12,11 +12,7 @@
             box-sizing: border-box;
             scroll-behavior: smooth;
         }
-        html, body {
-    max-width: 100%;
-    overflow-x: hidden;
-}
-
+        
                 
         #body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -1033,8 +1029,7 @@
                 width: 55px;
                 height: 55px;
                 bottom: 20px;
-                right: 15px;
-                max-width: 100vw;
+                right: 20px;
                 background-color: #25D366;
                 color: #ffffff;
                 border-radius: 50%;
@@ -1061,22 +1056,6 @@
                 position: sticky;
                 top: 0;
             }
-            body {
-                overflow-x: hidden;
-            }
-            .whatsapp-float {
-                right: 12px;
-            }
-            {
-    section:first-of-type {
-        height: 65px;
-    }
-
-    body {
-        padding-top: 65px;
-    }
-}
-
 
             .logo {
                 padding: 10px 0;
@@ -1336,24 +1315,10 @@
             0% { transform: translateX(0); }
             100% { transform: translateX(-100%); }
         }
-        /* FIX: prevent sticky <div id="header"> from hiding sections */
+        /* FIX: prevent sticky header from hiding sections */
         section[id] {
             scroll-margin-top: 160px;  /* matches full header height */
         }
-        /* FIX HEADER WOBBLE */
-section:first-of-type {
-    position: sticky;
-    top: 0;
-    width: 100%;
-    height: 80px;
-    background: #ffffff;
-    z-index: 9999;
-}
-body {
-    padding-top: 80px;
-    overflow-x: hidden;
-}
-
        
     </style>
 </head>
@@ -2243,7 +2208,7 @@ function closeDonate() {
         <p id="donateAmount"></p>
         <p id="donateDetails"></p>
 
-        <img src='Images\upi-qr.jpeg' alt="UPI QR" class="donation-qr">
+        <img src="D:\Janardhan\SVSGNT\svsgnt\Images\upi-qr.jpeg" alt="UPI QR" class="donation-qr">
         <p><b>UPI ID:</b> 9652613389@okbizaxis</p>
     </div>
 </div>
