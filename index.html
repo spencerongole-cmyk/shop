@@ -190,6 +190,16 @@
             margin: auto;
             padding: 0 20px;
         }
+        .slide video {
+            max-width: 60%;
+            max-height: 60%;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            margin: auto;
+            padding: 0 20px;
+        }
+
 
         /* Breaking News */
         .breaking-news {
@@ -1194,8 +1204,12 @@
                     max-height: calc(100vh - 120px);
                     overflow-y: auto;
                 }
-
-
+                @media (max-width: 768px) {
+                .slide video {
+                    max-width: 100%;
+                    max-height: 200px;
+                }
+}
 
 /* Mobile styles */
 @media (max-width: 768px) {
@@ -1377,6 +1391,12 @@
         <div class="slide">
             <img src=".\Images\doner.jpeg?w=400" alt="Doner">
         </div>
+        <div class="slide">
+    <video controls playsinline>
+        <source src="./Images/jab.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+</div>
     </div>
  
     <!-- Breaking News -->
@@ -1393,18 +1413,56 @@
             </div>
         </div>
     </div>
-    <script>
-        // Hero Slider
-        let currentSlide = 0;
-        const slides = document.querySelectorAll('.slide');
+    // Hero Slider
+        <script>
+let currentSlide = 0;
+const slides = document.querySelectorAll('.slide');
+let slideInterval = null;
 
-        function nextSlide() {
-            slides[currentSlide].classList.remove('active');
-            currentSlide = (currentSlide + 1) % slides.length;
-            slides[currentSlide].classList.add('active');
-        }
-        
-        setInterval(nextSlide, 4000);
+function startSlider() {
+    slideInterval = setInterval(nextSlide, 4000);
+}
+
+function stopSlider() {
+    clearInterval(slideInterval);
+}
+
+function nextSlide() {
+    const current = slides[currentSlide];
+    const video = current.querySelector('video');
+
+    // Remove active from current slide
+    current.classList.remove('active');
+
+    // If current slide has video → pause & reset it
+    if (video) {
+        video.pause();
+        video.currentTime = 0;
+    }
+
+    // Move to next slide
+    currentSlide = (currentSlide + 1) % slides.length;
+    const next = slides[currentSlide];
+    next.classList.add('active');
+
+    const nextVideo = next.querySelector('video');
+
+    // If next slide is video → wait until it ends
+    if (nextVideo) {
+        stopSlider();
+        nextVideo.play();
+
+        nextVideo.onended = () => {
+            startSlider();
+            nextSlide();
+        };
+    }
+}
+
+// Start slider
+startSlider();
+</script>
+
     </script>
 
     <!-- About Section -->
