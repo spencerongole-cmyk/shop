@@ -1,0 +1,2232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vasavi Satram - Divine Accommodation & Annadhanam Services</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+        
+                
+        #body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1;
+            color: #333333;
+        }
+
+        /* Header Styles */        
+
+        .top-bar .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .contact-info {
+            display: flex;
+            gap: 20px;
+        }
+
+        .contact-info a {
+            color: white;
+            text-decoration: none;
+        }
+
+        /* Navigation */
+        nav {
+            background: linear-gradient(135deg, #FF6B35 0%, #FF8C42 100%);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        /* Center trust name and place menu below heading */
+        .nav-container{
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Logo stays same position */
+        .logo{
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px 0;
+            padding-bottom: 10px;
+            align-self: flex-start;
+            flex-direction: column;
+            align-items: center;
+        }
+        .logo-icon img{
+            left: 80px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100px;          /* keeps same visual size */
+            height: 100px;
+            object-fit: contain; /* prevents distortion */
+            background: rgb(255, 255, 255);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            position: absolute;
+            color: #FF6B35;
+        }
+        
+
+        /* Center trust name text */
+        .logo h1{
+            color: rgb(63, 5, 237);
+            align-items: center;
+            text-align: center;
+            font-size: 42px;
+            font-weight: 1000;
+            padding-top: 10px;
+            
+        }
+
+        /* Put menu below heading and center */
+        /* ===== MENU BOX STYLE ===== */
+        .nav-menu {
+            list-style: none;
+            display: flex;
+            gap: 10px;
+            padding: 10px 0;
+            flex-wrap: wrap;
+        }
+
+        /* Each menu item box */
+        .nav-menu li a {
+            background: #ffffff;          /* box color */
+            color: #FF6B35;               /* text color */
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: 600;
+            border: 1px solid #FF6B35;
+            transition: all 0.3s ease;
+        }
+
+        /* Hover effect */
+        .nav-menu li a:hover {
+            background: #FF6B35;
+            color: #ffffff;
+            transform: translateY(-2px);
+        }
+
+        /* Active / current menu */
+        .nav-menu li a.active {
+            background: #1c1fdf;          /* active color */
+            border-color: #1c1fdf;
+            color: #ffffff;
+        }
+
+       .nav-menu {
+            margin-top: 5px;
+            justify-content: center;
+            list-style: none;
+            display: flex;
+            gap: 5px;
+        }
+
+        .nav-menu li a {
+            color: rgb(65, 5, 230);
+            text-decoration: none;
+            padding: 10px 18px;
+            display: block;
+            font-weight: 500;
+            transition: all 0.3s;
+            border-radius: 5px;
+        }
+
+        .nav-menu li a:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        
+
+        /* Hero Slider */
+        .hero-slider {
+            position: relative;
+            height: 500px;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #f5f5f5;
+        }
+
+        .slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        .slide img {
+            max-width: 60%;
+            max-height: 60%;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            margin: auto;
+            padding: 0 20px;
+        }
+
+        /* Breaking News */
+        .breaking-news {
+            background: #efc6854a;
+            padding: 15px 0;
+            border-left: 5px solid #FF6B35;
+        }
+
+        .breaking-news .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .breaking-news h3 {
+            color: #FF6B35;
+            margin-bottom: 10px;
+        }
+
+        .news-items {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .news-item {
+            color: #666;
+            padding: 5px 0;
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 60px 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            color: #FF6B35;
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .section-title p {
+            color: #666;
+            font-size: 18px;
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .about-text {
+            text-align: justify;
+            line-height: 1.6;
+            font-size: 17px;
+        }
+        .about-text p{
+            margin-bottom: 12px;
+            margin: 0 auto;
+            padding: 0 40px;   
+            max-width: 1000px;
+        }
+        #about.section {
+            padding-top: 25px;
+            padding-bottom: 15px;
+        }
+
+        #about .section-title {
+            margin-bottom: 15px;
+        }
+
+        .about-content {
+            margin-top: 0;
+        }
+
+
+     /* Leadership Cards */
+        .leadership {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin-top: -50px;
+            font-size: 10px;
+            text-align: center;
+        }
+
+        .leader-card {
+            text-align: center;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .leader-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .leader-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #FF6B35, #FF8C42);
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border: 4px solid #FF6B35;
+        }
+
+        .leader-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .leadership .leader-card h3{
+            color: #1c1fdf; /* blue example – change as you like */
+            margin-bottom: 8px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        .leadership .leader-card p:nth-of-type(1){
+            color: green;
+            font-size: 16px;
+        
+        }
+        .leadership .leader-card p:nth-of-type(2){
+            color: red;
+            font-weight: 600;
+        }
+        
+        .leadership .leader-card p{
+            margin: 4px 0;        
+            font-size: 13px;
+        }
+
+        .leadership .leader-card p strong{
+            display: inline-block;
+            margin-top: 6px;
+            color: #003366;  
+            font-weight: 800;
+        }
+        #committee.section {
+            padding-top: 10px;   /* was 60px */
+            padding-bottom: 30px;
+        }
+
+        #committee .section-title {
+            margin-bottom: 20px; /* reduce gap below heading */
+        }
+
+        #committee .leadership {
+            margin-top: 15px;    /* was 40px */
+        }
+        #donation {
+            scroll-margin-top: 110px;
+        }
+        .donation-card {
+    cursor: pointer;
+}
+
+.donate-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    z-index: 9999;
+}
+
+.donate-box {
+    background: #fff;
+    width: 300px;
+    margin: 10% auto;
+    padding: 20px;
+    border-radius: 12px;
+    text-align: center;
+    position: relative;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+        .donation-card:hover {
+            transform: translateY(-6px);
+        }
+        /* DONATION QR ONLY – does NOT affect facilities popup */
+.donation-qr {
+    width: 140px !important;
+    height: 140px !important;
+    max-width: 140px !important;
+    max-height: 140px !important;
+    object-fit: contain;
+    display: block;
+    margin: 10px auto;
+}
+        /* Committee Members Section */
+        .committee-section {
+            background: #f9f9f9;
+            padding: 60px 20px;
+        }
+
+        .committee-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 30px;
+        }
+
+        .committee-card {
+            text-align: center;
+            padding: 25px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            width: 100%;
+            max-width: 250px;
+            
+        }
+
+        .committee-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .committee-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            overflow: hidden;
+            border: 4px solid #FF6B35;
+        }
+
+        .committee-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .committee-card h3 {
+            color: #4f08e7;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .committee-card .location {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .committee-card .phone {
+            color: #FF6B35;
+            font-size: 14px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+
+        .committee-card .role {
+            color: #1c1fdf;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        /* Services */
+        .services {
+            background: #F5F5F5;
+        }
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+
+        .service-card {
+            background: white;
+            padding: 40px;
+            border-radius: 50px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(247, 3, 3, 0.9);
+            transition: all 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .service-icon {
+            font-size: 50px;
+            color: #FF6B35;
+            margin-bottom: 20px;
+        }
+
+        .service-card h3 {
+            color: #333333;
+            margin-bottom: 15px;
+        }
+        #services {
+            scroll-margin-top: 190px;  /* reduce from 160px */
+            padding-top: 30px;         /* reduce inner top space */
+        }
+
+
+        /* Branches */
+        /* Reduce space between Branches title and branch photos */
+        #branches {
+            padding-top: 10px;      /* reduce top white space */
+            padding-bottom: 30px;
+        }
+
+        #branches .section-title {
+            margin-bottom: -20px;    /* reduce gap below heading */
+        }
+
+        #branches .branches-grid {
+            margin-top: 0;          /* remove extra space before images */
+        }
+
+        .branches-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .branch-card {
+            position: relative;
+            height: 300px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .branch-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .branch-card:hover .branch-img {
+            transform: scale(1.1);
+        }
+
+        .branch-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            padding: 30px;
+            color: white;
+        }
+
+        .branch-overlay h3 {
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+
+        .branch-overlay p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        .map-link{
+            display: inline-block;
+            margin-top: 8px;
+            padding: 6px 12px;
+            background: #FF6B35;
+            color: #fff;
+            font-size: 13px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .map-link i{
+            margin-right: 5px;
+        }
+
+        .map-link:hover{
+            background: #ffffff;
+            color: #FF6B35;
+        }
+        /* Donation Section */
+        .donation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 25px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .donation-card {
+            background: #f9fff2;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.12);
+            transition: transform 0.3s;
+        }
+
+        .donation-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .donation-card h3 {
+            font-size: 16px;
+            color: #FF6B35;
+            margin-bottom: 8px;
+        }
+
+        .donation-card .amount {
+            font-size: 20px;
+            font-weight: bold;
+            color: #1c1fdf;
+        }
+
+
+        /* Services */
+        .Services {
+            background: white;
+        }
+
+        .Services-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .Services-item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 20px;
+            background: #9deb03;
+            border-radius: 10px;
+            transition: all 0.3s;
+        }
+
+        .Services-item:hover {
+            background: #0ba4e5;
+        }
+
+        .Services-icon {
+            font-size: 30px;
+            color: #FF6B35;
+        }
+        /* Facilities */
+        .facilities {
+            background: white;
+        }
+
+        .facilities-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .facility-item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 20px;
+            background: #FFF3E0;
+            border-radius: 10px;
+            transition: all 0.3s;
+        }
+
+        .facility-item:hover {
+            background: #FFE0B2;
+        }
+
+        .facility-icon {
+            font-size: 30px;
+            color: #FF6B35;
+        }
+        /* Popup Overlay */
+        .popup-overlay{
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Popup Box */
+        .popup-box{
+            background: #fff;
+            padding: 25px;
+            border-radius: 12px;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+            position: relative;
+        }
+
+        .popup-box img{
+            width: 100%;
+            max-height: 250px;
+            object-fit: contain;
+            margin: 15px 0;
+        }
+
+        /* Close Button */
+        .popup-close{
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #FF6B35;
+        }
+        .facility-item{
+            cursor: pointer;
+        }
+
+
+        /* Stats */
+        .stats {
+            background: linear-gradient(135deg, #FF6B35, #5f29c3);
+            color: white;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            text-align: center;
+        }
+
+        .stat-item h3 {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+
+        .stat-item p {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+        /* Reduce stats section height */
+        .stats{
+            padding: 20px 0;   /* earlier was large default padding */
+        }
+
+        /* Reduce gap between items */
+        .stats-grid{
+            gap: 10px;
+        }
+
+        /* Reduce number and label font sizes */
+        .stat-item h3{
+            font-size: 28px;   /* was 48px */
+            margin-bottom: 5px;
+        }
+
+        .stat-item p{
+            font-size: 12px;   /* was 18px */
+        }
+
+        /* Contact */
+        .contact {
+            background: #F5F5F5;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+        }
+
+        .contact-info-section {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: start;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .contact-item i {
+            color: #FF6B35;
+            font-size: 24px;
+            margin-top: 5px;
+        }
+
+        .contact-form {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .submit-btn {
+            background: #FF6B35;
+            color: white;
+            padding: 12px 40px;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .submit-btn:hover {
+            background: #FF8C42;
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        footer {
+            background: #333;
+            color: white;
+            padding: 50px 20px 20px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto 40px;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 20px;
+            color: #FF6B35;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: #FF6B35;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .social-links{
+            display: flex;
+            justify-content: center;   /* horizontally center */
+            align-items: center;       /* vertically center */
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: #FF6B35;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background: #FF8C42;
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #555;
+            color: #ccc;
+        }
+        footer {
+            background: #333;
+            padding: 20px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            color: #ccc;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .footer-bottom p {
+            margin: 6px 0;
+        }
+
+        .footer-bottom a {
+            color: #FF8C42;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .footer-bottom a:hover {
+            text-decoration: underline;
+        }
+            /* Responsive */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .about-content,
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .leadership,
+            .committee-grid,
+            .service-grid,
+            .branches-grid,
+            .facilities-grid,
+            .stats-grid,
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        /* ===== FIX HEADER WHITE SPACE ===== */
+
+            /* Home */
+            #home {
+                scroll-margin-top: 70px;
+            }
+
+            /* Services */
+            #services {
+                scroll-margin-top: 120px;
+            }
+
+            /* Facilities */
+            #facilities {
+                scroll-margin-top: 120px;
+            }
+
+            /* Contact */
+            #contact {
+                scroll-margin-top: 120px;
+            }
+
+            /* Reduce top padding for these sections */
+            #services.section,
+            #facilities.section,
+            #contact.section {
+                padding-top: 40px;
+            }
+
+            .nav-container {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding-top: 0; 
+            }
+
+            .logo {
+                display: flex;
+                flex-direction: column;
+                align-items: center;    
+                align-self: center;     
+                padding: 0;        
+                gap: 15px;
+            }
+
+            .logo h1 {
+                color: rgb(63, 5, 237);
+                text-align: center;     
+                font-size: 42px;
+                font-weight: 1000;
+                padding-top: 0;         
+                margin-top: 0;        
+            }
+            /* WhatsApp Floating Button */
+            .whatsapp-float {
+                position: fixed;
+                width: 55px;
+                height: 55px;
+                bottom: 20px;
+                right: 20px;
+                background-color: #25D366;
+                color: #ffffff;
+                border-radius: 50%;
+                font-size: 30px;
+                z-index: 3000;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-decoration: none;
+                box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            }
+
+            .whatsapp-float:hover {
+                background-color: #20b858;
+            }
+                
+        /* =======================
+        MOBILE VIEW FINAL FIX
+        ======================= */
+        @media (max-width: 768px) {
+
+            /* Fix header & logo */
+            nav {
+                position: sticky;
+                top: 0;
+            }
+
+            .logo {
+                padding: 10px 0;
+            }
+
+            .logo-icon img {
+                position: static;       /* REMOVE absolute */
+                transform: none;
+                width: 70px;
+                height: 70px;
+                margin: 0 auto;
+            }
+
+            .logo h1 {
+                font-size: 18px;
+                line-height: 1.3;
+                padding: 5px 10px;
+                text-align: center;
+            }
+
+           
+
+            /* Hero section */
+            .hero-slider {
+                height: 220px;
+            }
+
+            .slide img {
+                max-width: 100%;
+                max-height: 200px;
+            }
+
+            /* About text padding fix */
+            .about-text p {
+                padding: 0 10px;
+                font-size: 15px;
+                line-height: 1.6;
+            }
+
+            /* Leadership cards */
+            .leadership {
+                grid-template-columns: 1fr;
+                gap: 15px;
+                margin-top: 10px;
+            }
+
+            /* Committee cards */
+            .committee-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .committee-card {
+                max-width: 100%;
+                padding: 15px;
+            }
+
+            /* Branches */
+            .branches-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .branch-card {
+                height: 220px;
+            }
+            
+
+            /* Services */
+            .service-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .service-card {
+                padding: 20px;
+                border-radius: 20px;
+            }
+
+            /* Facilities */
+            .facilities-grid {
+                grid-template-columns: 1fr;
+            }
+
+            /* Stats */
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
+            }
+
+            .stat-item h3 {
+                font-size: 20px;
+            }
+
+            .stat-item p {
+                font-size: 12px;
+            }
+
+            /* Contact */
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            /* Footer */
+            .footer-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .social-links {
+                justify-content: center;
+            }
+
+            /* Fix section overlap with header */
+            section[id] {
+                scroll-margin-top: 120px;
+            }
+        }
+            /* Hamburger button */
+            .menu-toggle {
+                display: none;
+                background: none;
+                border: none;
+                font-size: 26px;
+                color: white;
+                cursor: pointer;
+            }
+            .donate-modal {
+                    align-items: flex-start !important;
+                    padding-top: 90px;   /* adjust if header is taller */
+                }
+
+                .donate-box {
+                    margin: 0 auto;
+                    max-height: calc(100vh - 120px);
+                    overflow-y: auto;
+                }
+
+
+
+/* Mobile styles */
+@media (max-width: 768px) {
+
+    .menu-toggle {
+        display: block;
+        position: absolute;
+        right: 20px;
+        top: 20px;
+        z-index: 2001;
+    }
+
+    .nav-menu {
+        display: none;
+        flex-direction: column;
+        background: white;
+        width: 100%;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    .nav-menu li {
+        border-bottom: 1px solid #eee;
+        text-align: center;
+    }
+
+    .nav-menu li a {
+        padding: 15px;
+        display: block;
+        color: #FF6B35;
+        font-size: 16px;
+    }
+
+    /* Show menu when active */
+    .nav-menu.active {
+        display: flex;
+    }
+
+    .nav-menu {
+        display: none;
+        flex-direction: column;
+        background: white;
+        width: 100%;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        padding: 5px 0; 
+    }
+
+    .nav-menu li {
+        border-bottom: 1px solid #eee;
+        text-align: center;
+    }
+
+    .nav-menu li a {
+        
+        padding: 8px 12px;     
+        font-size: 14px;       
+        margin: 2px 10px;      
+        display: block;
+        color: #FF6B35;
+        border-radius: 4px;    
+    }
+
+    #home {
+        /* Increased margin to account for the mobile logo + header height */
+        scroll-margin-top: 180px !important; 
+    }
+
+    .hero-slider {
+        height: 250px; /* Adjust based on your preference */
+        margin-top: 10px;
+    }
+}
+
+                /* ===== Breaking News Continuous Scroll ===== */
+        .breaking-ticker {
+            display: flex;
+            align-items: center;
+            background: #f1f1f2;
+            border-top: 2px solid #FF6B35;
+            border-bottom: 2px solid #FF6B35;
+            overflow: hidden;
+            height: 25px;
+        }
+
+        .breaking-title {
+            background:#f7f6f8;
+            color: #0509f1;
+            font-weight: bold;
+            padding: 0 15px;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            white-space: nowrap;
+        }
+
+        .ticker-wrap {
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .ticker-move {
+            display: inline-block;
+            white-space: nowrap;
+            padding-left: 100%;
+            animation: ticker 30s linear infinite;
+            font-weight: 600;
+            color: #1703f7;
+        }
+
+        /* Animation */
+        @keyframes ticker {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-100%); }
+        }
+        /* FIX: prevent sticky header from hiding sections */
+        section[id] {
+            scroll-margin-top: 160px;  /* matches full header height */
+        }
+       
+    </style>
+</head>
+<body>
+   
+    <!-- Navigation -->
+    <nav>
+    <div class="nav-container">
+        <div class="logo">
+            <div class="logo-icon">
+            <img src=".\Images\vasavi-matha.jfif" alt="Vasavi Matha">
+        </div>
+            <h1>Sri Vasavi Siva Ganga Nityanna Trust</h1>
+        </div>
+<button class="menu-toggle" id="menuToggle">
+<i class="fas fa-bars"></i>
+</button>
+        <ul class="nav-menu" id="navMenu">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">Aboutus</a></li>
+            <li><a href="#committee">Committee</a></li>
+            <li><a href="#branches">Branches</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#donation">Donation</a></li>
+            <li><a href="#facilities">Facilities</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </div>
+    <!-- Breaking News Ticker -->
+<div class="breaking-ticker">
+    <span class="breaking-title">Breaking News</span>
+    <div class="ticker-wrap">
+        <div class="ticker-move">
+            ✨ Arunachalam New Building Opening Ceremony – Coming Soon &nbsp;&nbsp; | &nbsp;&nbsp;
+            📢 Telecall Room Booking Now Available for All Branches &nbsp;&nbsp; | &nbsp;&nbsp;
+            🎉 We are planning to Open New Satrams at Popular pilgrim Center like Srisailam, Shiridi Etc - Stay Tuned &nbsp;&nbsp; | &nbsp;&nbsp;
+            📝 Managing Committee 2021–2029 Elected
+        </div>
+    </div>
+</div>
+
+</nav>
+
+
+    <!-- Hero Slider -->
+    <div id="home" class="hero-slider">
+        <div class="slide active">
+            <img src=".\Images\vasavi.jpg?w=400" alt="Vasavi Satram Main">
+        </div>
+        <div class="slide">
+            <img src=".\Images\kashi.png?w=400" alt="Temple View">
+        </div>
+        <div class="slide">
+            <img src=".\Images\tnm.jpg?w=400" alt="Accommodation">
+        </div>
+    </div>
+ 
+    <!-- Breaking News -->
+    <div class="breaking-news">
+        <div class="container">
+            <h3>Breaking News</h3>
+            <div class="news-items">
+                <strong>
+                <div class="news-item">✨ Arunachalam New Builduing Opening Cermony - Coming Soon</div>
+                <div class="news-item">📢 Telecall Room Booking Now Available for All Branches</div>
+                <div class="news-item">🎉 We are planning to Open New Satrams at Popular pilgrim Center like Srisailam, Shiridi Etc - Stay Tuned</div>
+                <div class="news-item">📝 Managing Committee 2021-2029 Elected</div>
+                </strong>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Hero Slider
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+
+        function nextSlide() {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+        
+        setInterval(nextSlide, 4000);
+    </script>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+    <div class="section-title">
+        <h2>About Vasavi Satram</h2>
+        <p><strong>Serving Devotees with Love and Devotion</strong></p>
+    </div>
+    </section>
+            <div class="about-content">
+                <div>
+                    <div class="about-text">
+                        <p>We are a unique organization called <strong>Vasavi Satram</strong> established to provide excellent facilities for pilgrims visiting sacred places. Our organization came into being with the vision of offering free meals and comfortable stay facilities in an ambient atmosphere.</p>
+                        <p style="margin-top: 15px;">Vasavi Satram has been providing peerless services to devotees at nominal maintenance charges, winning laurels from different corners. We operate branches at prominent pilgrim places providing accommodation, annadhanam (free meals), and various other services.</p>
+                        <p style="margin-top: 15px;">Our commitment extends beyond just providing shelter - we also support education through our Vidyadhanam program, offering financial assistance to economically backward and meritorious students.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Leadership Section -->
+            <section id="committee" class="section">
+            <div class="section-title">
+                <h2>Our Leadership</h2>
+                <p>Managing Committee 2021–2029</p>
+            </div>
+            ...
+    </section>
+
+            <div class="leadership">
+                <div class="leader-card">
+                    <div class="leader-avatar">
+                        <img src=".\Images\upendra.jpeg" alt="Sri. Kothamasu Ratnakar Rao">
+                    </div>
+                    <h3>Sri. Kothamasu Ratnakar Rao</h3>
+                    <p>Appapuram</p>
+                    <p><i class="fas fa-phone"></i> 9491673342</p>
+                    <p><strong>Hon. Chairman</strong></p>
+                </div>
+                <div class="leader-card">
+                    <div class="leader-avatar">
+                        <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Sri. Kotla Someswara Rao">
+                    </div>
+                    <h3>Sri. Kotla Someswara Rao</h3>
+                    <p>Tanuku</p>
+                    <p><i class="fas fa-phone"></i> 9347055575</p>
+                    <p><strong>President</strong></p>
+                </div>
+                <div class="leader-card">
+                    <div class="leader-avatar">
+                        <img src=".\Images\gs.jpeg?w=600" alt="Sri. Kanarmalapudi Hari Prasad Rao">
+                    </div>
+                    <h3>Sri. Kanarmalapudi Hari Prasad Rao</h3>
+                    <p>Ongole</p>
+                    <p><i class="fas fa-phone"></i> 9949912120</p>
+                    <p><strong>General Secretary</strong></p>
+                </div>
+                <div class="leader-card">
+                    <div class="leader-avatar">
+                        <img src="https://randomuser.me/api/portraits/men/67.jpg" alt="Sri. Chintha Srinivasa Rao">
+                    </div>
+                    <h3>Sri. Chintha Srinivasa Rao</h3>
+                    <p>Pidugurala</p>
+                    <p><i class="fas fa-phone"></i> 9885202524</p>
+                    <p><strong>Treasurer</strong></p>
+                </div>
+            </div>
+        </div>
+    </section>
+        <!-- Committee Members Section -->
+    <section  class="committee-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Committee Members</h2>
+                <p>Dedicated Team Serving the Trust</p>
+            </div>
+            <div class="committee-grid">
+                <div class="committee-card">
+                    <div class="committee-avatar">
+                        <img src=".\Images\ch suresh.jpeg" alt="Sri. Mamidipaka Hari Prasad">
+                    </div>
+                    <h3>Sri. CH. Suresh Babu</h3>
+                    <p class="location">Ongole</p>
+                    <p class="phone"><i class="fas fa-phone"></i> 7337415757</p>
+                    <p class="role">Organizing Secretary</p>
+                </div>
+
+                <div class="committee-card">
+                    <div class="committee-avatar">
+                        <img src=".\Images\subramanyam.jpeg" alt="Sri. Venkata Krishna Rao">
+                    </div>
+                    <h3>Sri. Kothamasu Bala Subramanyam</h3>
+                    <p class="location">Vijayawada</p>
+                    <p class="phone"><i class="fas fa-phone"></i> 9848113119</p>
+                    <p class="role">Vice President</p>
+                </div>
+
+                <div class="committee-card">
+                    <div class="committee-avatar">
+                        <img src=".\Images\mhp.jpeg" alt="Sri. Ramesh Kumar">
+                    </div>
+                    <h3>Sri. Mmamidipaka Hari Prasad</h3>
+                    <p class="location">Parchuru</p>
+                    <p class="phone"><i class="fas fa-phone"></i> 9440915646</p>
+                    <p class="role">Vice President</p>
+                </div>
+
+                <div class="committee-card">
+                    <div class="committee-avatar">
+                        <img src=".\Images\mhp.jpeg" alt="Sri. Suresh Babu">
+                    </div>
+                    <h3>Sri. Bysani Venkata SeshaPhani</h3>
+                    <p class="location">Tadipatri</p>
+                    <p class="phone"><i class="fas fa-phone"></i> 9848126259</p>
+                    <p class="role">Vice President</p>
+                </div>
+
+                <div class="committee-card">
+                    <div class="committee-avatar">
+                        <img src=".\Images\mhp.jpeg" alt="Sri. Narayana Swamy">
+                    </div>
+                    <h3>Sri. Penugonda Venkata Narasimha Rao</h3>
+                    <p class="location">Markapuram</p>
+                    <p class="phone"><i class="fas fa-phone"></i> 9246464501</p>
+                    <p class="role">Vice President</p>
+                </div>
+
+                <div class="committee-card">
+                    <div class="committee-avatar">
+                        <img src=".\Images\tanoj.jpeg" alt="Sri. Prasad Reddy">
+                    </div>
+                    <h3>Sri. Sidda Suresh Kumar</h3>
+                    <p class="location">Ongole</p>
+                    <p class="phone"><i class="fas fa-phone"></i> 9949115749</p>
+                    <p class="role">Vice President</p>
+                </div>
+
+                <div class="committee-card">
+                    <div class="committee-avatar">
+                        <img src=".\Images\mhp.jpeg" alt="Sri. Venkateswara Rao">
+                    </div>
+                    <h3>Sri. koparthi Venkata Narayana Murthy</h3>
+                    <p class="location">Akuveedu</p>
+                    <p class="phone"><i class="fas fa-phone"></i> 9885078064</p>
+                    <p class="role">Vice President</p>
+                </div>
+
+                <div class="committee-card">
+                    <div class="committee-avatar">
+                        <img src="https://randomuser.me/api/portraits/men/11.jpg" alt="Sri. Subba Rao">
+                    </div>
+                    <h3>Sri. Mattupalli Ravi Kumar</h3>
+                    <p class="location">Guntur</p>
+                    <p class="phone"><i class="fas fa-phone"></i> 9441335332</p>
+                    <p class="role">Vice President</p>
+                </div>
+
+                <div class="committee-card">
+                    <div class="committee-avatar">
+                        <img src="https://randomuser.me/api/portraits/men/23.jpg" alt="Sri. Murali Krishna">
+                    </div>
+                    <h3>Sri. Vemula Lakshman Rao</h3>
+                    <p class="location">Khammam</p>
+                    <p class="phone"><i class="fas fa-phone"></i> 9394621974</p>
+                    <p class="role">Vice President</p>
+                </div>
+
+                <div class="committee-card">
+                    <div class="committee-avatar">
+                        <img src="https://randomuser.me/api/portraits/men/34.jpg" alt="Sri. Srinivasa Reddy">
+                    </div>
+                    <h3>Sri. Gudivada Appalaraju</h3>
+                    <p class="location">Peravalli</p>
+                    <p class="phone"><i class="fas fa-phone"></i> 9392106340</p>
+                    <p class="role">Vice President</p>
+                </div>
+                <div class="committee-card">
+                    <div class="committee-avatar">
+                        <img src="https://randomuser.me/api/portraits/men/22.jpg" alt="Sri. Mamidipaka Hari Prasad">
+                    </div>
+                    <h3>Sri. Kankicharla Venkateswarallu</h3>
+                    <p class="location">Ponnuru</p>
+                    <p class="phone"><i class="fas fa-phone"></i>9440264647</p>
+                    <p class="role">Vice President</p>
+                </div>
+
+                <div class="committee-card">
+                    <div class="committee-avatar">
+                        <img src="https://randomuser.me/api/portraits/men/33.jpg" alt="Sri. Venkata Krishna Rao">
+                    </div>
+                    <h3>Sri. Konkimalla Srinivasa Rao</h3>
+                    <p class="location">Ongole</p>
+                    <p class="phone"><i class="fas fa-phone"></i> 9848548001</p>
+                    <p class="role">Vice President</p>
+                </div>
+
+                <div class="committee-card">
+                    <div class="committee-avatar">
+                        <img src="https://randomuser.me/api/portraits/men/44.jpg" alt="Sri. Ramesh Kumar">
+                    </div>
+                    <h3>Sri. Atyam Surya Narayana Murthy </h3>
+                    <p class="location">Kakinada</p>
+                    <p class="phone"><i class="fas fa-phone"></i> 9849377315</p>
+                    <p class="role">Vice President</p>
+                </div>
+
+                <div class="committee-card">
+                    <div class="committee-avatar">
+                        <img src="https://randomuser.me/api/portraits/men/55.jpg" alt="Sri. Suresh Babu">
+                    </div>
+                    <h3>Sri. Thatha Kumara Swamy</h3>
+                    <p class="location">Chirala</p>
+                    <p class="phone"><i class="fas fa-phone"></i> 9290130126</p>
+                    <p class="role">Vice President</p>
+                </div>
+
+                <div class="committee-card">
+                    <div class="committee-avatar">
+                        <img src="https://randomuser.me/api/portraits/men/66.jpg" alt="Sri. Narayana Swamy">
+                    </div>
+                    <h3>Sri. Padurthi Venkata Koteswara Rao</h3>
+                    <p class="location">Ongole</p>
+                    <p class="phone"><i class="fas fa-phone"></i> 9849964709</p>
+                    <p class="role">Vice President</p>
+                </div>
+
+                <div class="committee-card">
+                    <div class="committee-avatar">
+                        <img src="https://randomuser.me/api/portraits/men/77.jpg" alt="Sri. Prasad Reddy">
+                    </div>
+                    <h3>Sri. Singam Setty Sri Krishna</h3>
+                    <p class="location">Vijayawada</p>
+                    <p class="phone"><i class="fas fa-phone"></i> 9441306822</p>
+                    <p class="role">Joint Secretary</p>
+                </div>
+
+                <div class="committee-card">
+                    <div class="committee-avatar">
+                        <img src="https://randomuser.me/api/portraits/men/88.jpg" alt="Sri. Venkateswara Rao">
+                    </div>
+                    <h3>Sri. Sannidhi Rama Venkateswara Rao</h3>
+                    <p class="location">Akuveedu</p>
+                    <p class="phone"><i class="fas fa-phone"></i> 9849872969</p>
+                    <p class="role">Joint Secretary</p>
+                </div>
+
+                <div class="committee-card">
+                    <div class="committee-avatar">
+                        <img src="https://randomuser.me/api/portraits/men/11.jpg" alt="Sri. Subba Rao">
+                    </div>
+                    <h3>Sri. Kanamarlapudi Samba Siva Rao  </h3>
+                    <p class="location">Ongole</p>
+                    <p class="phone"><i class="fas fa-phone"></i> 9704406060</p>
+                    <p class="role">Joint Secretary</p>
+                </div>
+
+                <div class="committee-card">
+                    <div class="committee-avatar">
+                        <img src="https://randomuser.me/api/portraits/men/23.jpg" alt="Sri. Murali Krishna">
+                    </div>
+                    <h3>Sri. Gurram Singaiah</h3>
+                    <p class="location">Kandhukuru</p>
+                    <p class="phone"><i class="fas fa-phone"></i> 9849112440</p>
+                    <p class="role">Joint Secretary</p>
+                </div>
+
+                <div class="committee-card">
+                    <div class="committee-avatar">
+                        <img src="https://randomuser.me/api/portraits/men/34.jpg" alt="Sri. Srinivasa Reddy">
+                    </div>
+                    <h3>Sri. Dudhi Prabhakar</h3>
+                    <p class="location">Nizamabad </p>
+                    <p class="phone"><i class="fas fa-phone"></i> 9963112522</p>
+                    <p class="role">Joint Secretary</p>
+                </div>
+                <div class="committee-card">
+                    <div class="committee-avatar">
+                        <img src="https://randomuser.me/api/portraits/men/23.jpg" alt="Sri. Murali Krishna">
+                    </div>
+                    <h3>Sri. Pulavarthy Ravi Babu</h3>
+                    <p class="location">New Delhi</p>
+                    <p class="phone"><i class="fas fa-phone"></i> 9818555447</p
+                    <p class="role">Joint Secretary</p>
+                </div>
+
+                <div class="committee-card">
+                    <div class="committee-avatar">
+                        <img src="https://randomuser.me/api/portraits/men/34.jpg" alt="Sri. Srinivasa Reddy">
+                    </div>
+                    <h3>Sri. Grandhi Lakshmi Ragavamma</h3>
+                    <p class="location">Visakapatnam</p>
+                    <p class="phone"><i class="fas fa-phone"></i> 8790048464</p>
+                    <p class="role">Joint Secretary</p>
+                </div>
+                <div class="committee-card">
+                    <div class="committee-avatar">
+                        <img src=".\Images\jk.jpg" alt="P.V.Janardhan Kumar">
+                    </div>
+                    <h3>Sri. P.V.Janardhan Kumar</h3>
+                    <p class="location">Ongole</p>
+                    <p class="phone"><i class="fas fa-phone"></i> 9133113108</p>
+                    <p class="role">Trustee Director</p>
+                </div>
+                <div class="committee-card">
+                    <div class="committee-avatar">
+                        <img src=".\Images\tanoj.jpeg" alt="Sri. Srinivasa Reddy">
+                    </div>
+                    <h3>Sri. Chebrolu Tanoj Srinivas Kumar</h3>
+                    <p class="location">Ongole</p>
+                    <p class="phone"><i class="fas fa-phone"></i> 8056117694</p>
+                    <p class="role">Trustee Director</p>
+                </div>
+                <div class="committee-card">
+                    <div class="committee-avatar">
+                        <img src="https://randomuser.me/api/portraits/men/34.jpg" alt="Sri. Srinivasa Reddy">
+                    </div>
+                    <h3>Sri. N.V.K.NAGA CHANDRA SURESH</h3>
+                    <p class="location">Tanuku</p>
+                    <p class="phone"><i class="fas fa-phone"></i> 9966402233</p>
+                    <p class="role">Trustee Director</p>
+                </div>
+                <div class="committee-card">
+                    <div class="committee-avatar">
+                        <img src=".\Images\tanoj.jpeg" alt="Sri. Srinivasa Reddy">
+                    </div>
+                    <h3>Sri. Pulavarthy Lakshman Swamy</h3>
+                    <p class="location">Akiveedu</p>
+                    <p class="phone"><i class="fas fa-phone"></i> 9394355556</p>
+                    <p class="role">Trustee Director</p>
+                </div>
+                <div class="committee-card">
+                    <div class="committee-avatar">
+                        <img src="https://randomuser.me/api/portraits/men/34.jpg" alt="NERELLA RAGHU NANDAN">
+                    </div>
+                    <h3>Sri. Nerella Raghu Nandan</h3>
+                    <p class="location">Ongole</p>
+                    <p class="phone"><i class="fas fa-phone"></i> 9573222455</p>
+                    <p class="role">Trustee Director</p>
+                </div>
+                <div class="committee-card">
+                    <div class="committee-avatar">
+                        <img src=".\Images\tanoj.jpeg" alt="Sri. Srinivasa Reddy">
+                    </div>
+                    <h3>Sri. Batchu Lakshmi Prasad</h3>
+                    <p class="location">Chennai</p>
+                    <p class="phone"><i class="fas fa-phone"></i> 9642653389</p>
+                    <p class="role">Trustee Director</p>
+                </div>
+                <div class="committee-card">
+                    <div class="committee-avatar">
+                        <img src="https://randomuser.me/api/portraits/men/34.jpg" alt="Sri. Srinivasa Reddy">
+                    </div>
+                    <h3>Sri. Karumuri Appala Raju</h3>
+                    <p class="location">Tanuku</p>
+                    <p class="phone"><i class="fas fa-phone"></i> 9246666736</p>
+                    <p class="role">Trustee Director</p>
+                </div>
+                <div class="committee-card">
+                    <div class="committee-avatar">
+                        <img src=".\Images\tanoj.jpeg" alt="Sri. Srinivasa Reddy">
+                    </div>
+                    <h3>Sri. Vankayala Ranganayakulu</h3>
+                    <p class="location">Thirupathi</p>
+                    <p class="phone"><i class="fas fa-phone"></i> 7339751003</p>
+                    <p class="role">Trustee Director</p>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- Branches Section -->
+        <section id="branches" class="section">
+        <div class="section-title">
+            <h2>Our Branches</h2>
+            <p>Serving Devotees Across Sacred Places</p>
+        </div>
+        ...
+    </section>
+            <div class="branches-grid">
+                <div class="branch-card">
+                    <img src=".\Images\kashi.png?w=600" alt="Varanasi" class="branch-img">
+                    <div class="branch-overlay">
+                        <h3>Siva Ganga</h3>
+                        <p>VARANASI</p>
+                        <a 
+                        href="https://www.google.com/maps?q=Varanasi,Uttar+Pradesh"
+                        target="_blank"
+                        class="map-link">
+                        <i class="fas fa-map-marker-alt"></i> View Location
+                        </a>
+                    </div>
+                </div>
+                <div class="branch-card">
+                    <img src=".\Images\Tpty.jpg?w=600" alt="Tirupati" class="branch-img">
+                    <div class="branch-overlay">
+                        <h3>Siva Ganga</h3>
+                        <p>TIRUPATI</p>
+                        <a 
+                        href="https://www.google.com/maps?q=Tirupati,Andhra+Pradesh"
+                        target="_blank"
+                        class="map-link">
+                        <i class="fas fa-map-marker-alt"></i> View Location
+                        </a>
+                    </div>
+                </div>
+                <div class="branch-card">
+                    <img src=".\Images\tnm.jpg?w=600" alt="Thiruvannamalai" class="branch-img">
+                    <div class="branch-overlay">
+                        <h3>Siva Ganga</h3>
+                        <p>Arunachalam</p>
+                        <a 
+                        href="https://maps.app.goo.gl/R8syPMcjRtpUoBHx6"
+                        target="_blank"
+                        class="map-link">
+                        <i class="fas fa-map-marker-alt"></i> View Location
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+
+     <!-- Services Section -->
+    <section id="services" class="section services-title">
+            <div class="section-title">
+                <h2>Our Services</h2>
+                <p>Why Choose Vasavi Siva Ganga</p>
+            </div>
+            <div class="service-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-utensils"></i>
+                    </div>
+                    <h3>Annadhanam</h3>
+                    <p>Purely homely and hygienic food served in modern dining halls. We provide nutritious meals to thousands of devotees daily.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3>Vidyadhanam</h3>
+                    <p>Financial assistance to economically backward and meritorious students pursuing their educational dreams. With Support Of Vasavi Vidyanidhi</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-bed"></i>
+                    </div>
+                    <h3>Satram Facilities</h3>
+                    <p>Comfortable stay facilities with modern amenities for pilgrims visiting sacred places across India.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Donation Section -->
+<section id="donation" class="section">
+    <div class="section-title">
+        <h2>Donations</h2>
+        <p>Your support helps us serve devotees</p>
+    </div>
+
+    <div class="container">
+
+    <div class="donation-grid">
+
+    <div class="donation-card popular"
+     onclick="openDonate(
+        'General Donner',
+        '₹ 5,116/-',
+        'Those who donate Rs. 5,116/- will be considered regular donors. For them, a free meal service will be provided on one day of their choice during the year, and locker facilities will be provided for two days..')">
+    <h3>General Donner</h3>
+    <p class="amount">₹ 5,116/-</p>
+</div>
+
+    <div class="donation-card"
+         onclick="openDonate(
+           'Locker Donor',
+           '₹ 10,116/-',
+           'Those who donate ₹ 10,116/- will be considered donors of a bed with a locker. Annadanam (free meal service) will be provided on two days of their choice during the year, and they will be provided accommodation with a bed and locker for 5 days..'
+         )">
+        <h3>Locker Donor</h3>
+        <p class="amount">₹ 10,116/-</p>
+    </div>
+
+    <div class="donation-card "
+         onclick="openDonate(
+           'Annadatha',
+           '₹ 25,116/-',
+           'Those who donate Rs. 25,116/- will be considered benefactors. Annadanam (free meal service) will be provided on 5 days of their choice during the year, and room accommodation will be provided for 2 days. (Maintenance charges will be collected)..'
+         )">
+        <h3>Annadatha</h3>
+        <p class="amount">₹ 25,116/-</p>
+    </div>
+
+    <div class="donation-card "
+         onclick="openDonate(
+           'Nitya Annadatha',
+           '₹ 50,116/-',
+           'Those who donate ₹50,116/- will be considered permanent benefactors of the daily food service. Every day, food will be served in their name, and a photograph of their family will be displayed on the TV in the food hall. Every year, on the day of the Karthika Deepotsavam festival, a special puja will be performed in their name, and prasadam (blessed food) will be sent to them. They will also be provided with room accommodation for four days in a year (maintenance charges will be applicable)..'
+         )">
+        <h3>Nitya Annadatha</h3>
+        <p class="amount">₹ 50,116/-</p>
+    </div>
+
+    <div class="donation-card "
+         onclick="openDonate(
+           'Vamsapaaramparya Nityannadatha',
+           '₹ 1,00,116/-',
+           'Those who donate ₹ 1,00,116/- will be considered hereditary daily food donors. They will be provided room accommodation for 7 days in a year (maintenance charges will be collected). Priority will be given in room booking. Every day, food will be served in their name, and a photo of their family members will be displayed on the TV in the food hall. Every year, on the day of the Karthika Deepotsavam festival, a puja will be performed in their name, and the prasadam (offering) will be sent to them..'
+         )">
+        <h3>Vamsapaaramparya Nityannadatha</h3>
+        <p class="amount">₹ 1,00,116/-</p>
+    </div>
+
+    <div class="donation-card "
+         onclick="openDonate(
+           'Vamsapaaramparya Rajaposhakulu',
+           '₹.2,50,116/-',
+           'Those who donate ₹.2,50,116/- will be considered hereditary royal patrons, and they will be provided with room accommodation for 15 days a year (maintenance charges will be collected). Priority will be given in room bookings. Every day, food will be distributed in their name, and their family photo will be shown on TV, and their names will be read out. Every year, on the day of the Karthika Deepotsavam festival, a special puja will be performed in their name, and the prasadam (offering) will be sent to them..'
+         )">
+        <h3>Vamsapaaramparya Rajaposhakulu</h3>
+        <p class="amount">₹.2,50,116/-</p>
+    </div>
+
+    <div class="donation-card"
+         onclick="openDonate(
+           'Vamsapaaramparya Sasvatha Room Datha',
+           '₹ 5,50,116/-',
+           'Those who donate ₹ 5,50,116/- will be considered hereditary permanent room donors. They will be provided room accommodation for 30 days in a year (maintenance charges will be collected). They will be given first priority in room booking. Every day, food will be distributed in their name, and their family photo will be displayed on TV, and their names will be read out. Every year, on the day of the Karthika Deepotsavam festival, a puja will be performed in their name, and prasadam will be sent to them..'
+         )">
+        <h3>Vamsapaaramparya Sasvatha Room Datha</h3>
+        <p class="amount">₹ 5,50,116/-</p>
+    </div>
+
+</div>
+
+</section>
+
+
+        <!-- Facilities Section -->
+            <section id="facilities" class="section facilities-title">
+                <div class="container">
+                    <div class="section-title">
+                        <h2>Room Facilities</h2>
+                        <p>Best Facilities and Comforts for Devotees</p>
+                    </div>
+                    <div class="facilities-grid">
+
+        <!-- AC & Non-AC Rooms -->
+            <div class="facility-item" onclick="openFacilityPopup(
+                'AC & Non-AC Rooms',
+                'Comfortable AC and Non-AC rooms available for devotees.',
+                'D:/Janardhan/SVSGNT/Images/ac-room.jpg'
+            )">
+                <div class="facility-icon"><i class="fas fa-snowflake"></i></div>
+                <div>
+                    <h4>AC & Non-AC Rooms</h4>
+                    <p>Suite, Deluxe, and Dormitory facilities available</p>
+                </div>
+            </div>
+
+        <!-- Entertainment -->
+            <div class="facility-item" onclick="openFacilityPopup(
+                'Entertainment',
+                'Color Television in every room with cable connection.',
+                'D:/Janardhan/SVSGNT/Images/tv-room.jpg'
+            )">
+                <div class="facility-icon"><i class="fas fa-tv"></i></div>
+                <div>
+                    <h4>Entertainment</h4>
+                    <p>Television with cable connection</p>
+                </div>
+            </div>
+
+        <!-- Hot Water -->
+            <div class="facility-item" onclick="openFacilityPopup(
+                '24 Hours Hot Water',
+                '24×7 hot water facility in all rooms.',
+                'D:/Janardhan/SVSGNT/Images/water-heater.jpg'
+            )">
+                <div class="facility-icon"><i class="fas fa-hot-tub"></i></div>
+                <div>
+                    <h4>Hot Water Supply</h4>
+                    <p>24 hours supply of hot water</p>
+                </div>
+            </div>
+
+        <!-- Mineral Water -->
+            <div class="facility-item" onclick="openFacilityPopup(
+                'Mineral Water',
+                'Clean and safe mineral drinking water on every floor.',
+                'D:/Janardhan/SVSGNT/Images/mineral-water.jpg'
+            )">
+                <div class="facility-icon"><i class="fas fa-tint"></i></div>
+                <div>
+                    <h4>Mineral Water</h4>
+                    <p>Safe drinking water on each floor</p>
+                </div>
+            </div>
+
+        <!-- Lift Facility -->
+            <div class="facility-item" onclick="openFacilityPopup(
+                'Lift Facility',
+                '24×7 lift facility for senior citizens and luggage.',
+                'D:/Janardhan/SVSGNT/Images/lift.jpg'
+            )">
+                <div class="facility-icon"><i class="fas fa-elevator"></i></div>
+                <div>
+                    <h4>Lift Facility</h4>
+                    <p>Round the clock lift service</p>
+                </div>
+            </div>
+
+        <!-- Flexible Checkout -->
+            <div class="facility-item" onclick="openFacilityPopup(
+                'Flexible Check-out',
+                '24 hours flexible checkout with SMS support.',
+                'D:/Janardhan/SVSGNT/Images/checkout.avif'
+            )">
+                <div class="facility-icon"><i class="fas fa-clock"></i></div>
+                <div>
+                    <h4>Flexible Check-out</h4>
+                    <p>24 hours checkout facility</p>
+                </div>
+            </div>
+            <div id="facilityPopup" class="popup-overlay">
+            <div class="popup-box">
+                <span class="popup-close" onclick="closeFacilityPopup()">&times;</span>
+                <h3 id="popupTitle"></h3>
+                <img id="popupImage" src="" alt="">
+                <p id="popupText"></p>
+            </div>
+        </div>
+
+        </div>
+
+    </section>
+
+    <!-- Stats Section -->
+    <section class="section stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <h3>5,000+</h3>
+                    <p>Donors</p>
+                </div>
+                <div class="stat-item">
+                    <h3>30+</h3>
+                    <p>Members</p>
+                </div>
+                <div class="stat-item">
+                    <h3>100+</h3>
+                    <p>Rooms</p>
+                </div>
+                <div class="stat-item">
+                    <h3>3</h3>
+                    <p>Locations</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Contact Us</h2>
+                <p>Get in touch with Vasavi Satram</p>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-info-section">
+                    <h3 style="color: #FF6B35; margin-bottom: 30px;">Contact Information</h3>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h4>Administrative Office</h4>
+                            <p>Shop No.6,2nd Floor,Gupthas Mid Town,Guntur Road, Ongole<br>Andhra Pradesh - 523001, India</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <h4>Phone</h4>
+                            <p>+91-96426-53389<br>+91-99499-12120</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h4>Email</h4>
+                            <p>vasavisivaganganityannatrust@gmail.com</p>
+                        </div>
+                    </div>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/profile.php?id=100081009190970" target="_blank">
+                        <i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <h3 style="color: #FF6B35; margin-bottom: 30px;">Send us a Message</h3>
+                    <form action="https://formsubmit.co/spencerongole@gmail.com" method="POST" />
+                        <div class="form-group">
+                            <label>Name</label>
+                            <input type="text" name="name" placeholder="Your Name" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" name="email" placeholder="Your Email" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Phone</label>
+                            <input type="tel" name="phone" placeholder="Your Phone">
+                        </div>
+                        <div class="form-group">
+                            <label>Message</label>
+                            <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">Send Message</button>
+                        <input type="hidden" name="_captcha" value="false">
+                        <input type="hidden" name="_template" value="table">
+                        <input type="hidden" name="_next" value="thankyou.html">
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script>
+function openFacilityPopup(title, text, image){
+    document.getElementById("popupTitle").innerText = title;
+    document.getElementById("popupText").innerText = text;
+    document.getElementById("popupImage").src = image;
+    document.getElementById("facilityPopup").style.display = "flex";
+}
+
+function closeFacilityPopup(){
+    document.getElementById("facilityPopup").style.display = "none";
+}
+</script>
+    <script>
+        const menuToggle = document.getElementById("menuToggle");
+        const navMenu = document.getElementById("navMenu");
+    
+        // Toggle menu when hamburger icon is clicked
+        menuToggle.addEventListener("click", () => {
+            navMenu.classList.toggle("active");
+        });
+    
+        // NEW: Close menu when a link is clicked
+        const navLinks = document.querySelectorAll(".nav-menu li a");
+        navLinks.forEach(link => {
+            link.addEventListener("click", () => {
+                navMenu.classList.remove("active");
+            });
+        });
+    </script>
+    <footer>
+
+    <div class="footer-bottom">
+
+        <p>
+            © <span id="year"></span> Sri Vasavi Siva Ganga Nityanna Trust. All Rights Reserved.
+        </p>
+
+        <p>
+            Designed by <strong>Your Name / Company</strong>
+        </p>
+
+        <p>
+            📧 <a href="mailto:vasavisivaganga@gmail.com">vasavisivaganga@gmail.com</a>
+            &nbsp; | &nbsp;
+            📞 <a href="tel:+919642653389">+91 96426 53389</a>
+        </p>
+
+        <p>
+            <a href="privacy.html">Privacy Policy</a>
+            &nbsp; | &nbsp;
+            <a href="terms.html">Terms & Conditions</a>
+        </p>
+
+    </div>
+
+</footer>
+<script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+<!-- WhatsApp Chat Button -->
+<a href="https://wa.me/919642653389" class="whatsapp-float" target="_blank">
+    <i class="fab fa-whatsapp"></i>
+</a>
+
+function closeDonate() {
+    document.getElementById("donateModal").style.display = "none";
+}
+</script>
+<div class="donate-modal" id="donateModal">
+    <div class="donate-box">
+        <span class="close" onclick="closeDonate()">×</span>
+
+        <h3 id="donateTitle"></h3>
+        <p id="donateAmount"></p>
+        <p id="donateDetails"></p>
+
+        <img src='Images\upi-qr.jpeg' alt="UPI QR" class="donation-qr">
+        <p><b>UPI ID:</b> 9652613389@okbizaxis</p>
+    </div>
+</div>
+
+<script>
+function openDonate(title, amount, details) {
+    document.getElementById("donateTitle").innerText = title;
+    document.getElementById("donateAmount").innerText = amount;
+    document.getElementById("donateDetails").innerText = details;
+    document.getElementById("donateModal").style.display = "block";
+}
+
+function closeDonate() {
+    document.getElementById("donateModal").style.display = "none";
+}
+</script>
+
+
+
+</body>
+</html>
