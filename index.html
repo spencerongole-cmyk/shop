@@ -1333,6 +1333,40 @@
         section[id] {
             scroll-margin-top: 160px;  /* matches full header height */
         }
+        /* Audio Player */
+        .audio-player {
+            background: var(--bg-light);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 10px 0;
+            text-align: center;
+        }
+
+        .audio-player h4 {
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+
+        audio {
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--secondary-color);
+            color: white;
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            margin: 10px;
+            transition: background 0.3s;
+        }
+
+        .cta-button:hover {
+            background: var(--hover-color);
+        }
        
     </style>
 </head>
@@ -2193,6 +2227,14 @@ startSlider();
             </div>
         </div>
     </section>
+    <!-- Audio Player -->
+        <div class="audio-player">
+            <h4 data-translate="audioTitle">Om Namah Shivaya</h4>
+            <audio controls>
+                <source src=".\Images\om-namah-shivaya.mp3" type="audio/mpeg">
+                <span data-translate="audioNotSupported">Your browser does not support the audio element.</span>
+            </audio>
+        </div>
     <script>
 function openFacilityPopup(title, text, image){
     document.getElementById("popupTitle").innerText = title;
