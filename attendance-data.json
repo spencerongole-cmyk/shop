@@ -1,0 +1,56 @@
+{
+    "employees": [
+        {
+            "id": "mn79mow9x58d0emr4uh",
+            "name": "Upendra K",
+            "email": "kannaongole@gmail.com",
+            "dept": "Field",
+            "position": "Field Incharge",
+            "salary": 15000,
+            "joinDate": "2020-09-27",
+            "phone": "7032660399",
+            "status": "active",
+            "pass": "9798"
+        },
+        {
+            "id": "mn7a2621qfm4kqf84pk",
+            "name": "Manikanta",
+            "email": "pentelamanikanta@gmail.com",
+            "dept": "Office",
+            "position": "CCO",
+            "salary": 6000,
+            "joinDate": "2026-01-01",
+            "phone": "9293458237",
+            "status": "active",
+            "pass": "2005"
+        }
+    ],
+    "attendance": [
+        {
+            "id": "mn79nbbziqecpph4qg",
+            "empId": "mn79mow9x58d0emr4uh",
+            "date": "2026-03-26",
+            "checkIn": "02:54 pm",
+            "checkOut": "08:09 pm"
+        },
+        {
+            "id": "mn7a5qb6qor7sthwl",
+            "empId": "mn7a2621qfm4kqf84pk",
+            "date": "2026-03-26",
+            "checkIn": "03:08 pm",
+            "checkOut": null
+        }
+    ],
+    "leaves": [
+        {
+            "id": "mn7hzqqgj0yicjchza",
+            "empId": "mn79mow9x58d0emr4uh",
+            "type": "Other",
+            "from": "2026-03-27",
+            "to": "2026-03-27",
+            "days": 1,
+            "reason": "Request a leave for SRINAMA NAVAMI festival to casual leave",
+            "status": "pending"
+        }
+    ]
+}
