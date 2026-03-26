@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Svsm Spencer Plaza — Attendance System</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F5F3EE;--surface:#FFFFFF;--surface2:#F0EDE6;--border:#DDD9CF;
+  --text:#1A1814;--text2:#6B6558;
+  --accent:#2D6A4F;--accent2:#40916C;--accent-light:#D8F3DC;
+  --danger:#C1121F;--danger-light:#FFE8E8;
+  --warn:#D4A017;--warn-light:#FFF5CC;
+  --blue:#1B4FD8;--blue-light:#E8EEFF;
+  --shadow:0 2px 16px rgba(26,24,20,0.08);--shadow-lg:0 8px 40px rgba(26,24,20,0.14);
+  --radius:14px;--radius-sm:8px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:14px}
+
+/* LOGIN */
+#loginScreen{min-height:100vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#1A1814 0%,#2D6A4F 100%)}
+.login-box{background:var(--surface);border-radius:20px;padding:44px 40px;width:420px;max-width:95vw;box-shadow:var(--shadow-lg)}
+.login-logo{font-family:'DM Serif Display',serif;font-size:28px;margin-bottom:4px}
+.login-tagline{font-size:12.5px;color:var(--text2);margin-bottom:28px}
+.role-tabs{display:flex;border:1px solid var(--border);border-radius:var(--radius-sm);overflow:hidden;margin-bottom:24px}
+.role-tab{flex:1;padding:10px;text-align:center;cursor:pointer;font-size:13.5px;font-weight:500;background:var(--surface2);color:var(--text2);border:none;font-family:'DM Sans',sans-serif;transition:all .15s}
+.role-tab.active{background:var(--accent);color:#fff}
+.login-field{display:flex;flex-direction:column;gap:6px;margin-bottom:14px}
+.login-field label{font-size:12.5px;font-weight:500;color:var(--text2)}
+.login-field input{padding:11px 14px;border:1px solid var(--border);border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:14px;color:var(--text);outline:none;transition:border-color .15s}
+.login-field input:focus{border-color:var(--accent2)}
+.login-btn{width:100%;padding:12px;background:var(--accent);color:#fff;border:none;border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:15px;font-weight:500;cursor:pointer;transition:background .15s}
+.login-btn:hover{background:var(--accent2)}
+.Address-shop{font-size:12px;color:var(--text2);text-align:center;margin-top:16px;line-height:1.8;background:var(--surface2);border-radius:var(--radius-sm);padding:12px}
+.Address-shop b{color:var(--text)}
+.login-error{font-size:12.5px;color:var(--danger);text-align:center;padding:8px;background:var(--danger-light);border-radius:var(--radius-sm);margin-bottom:12px;display:none}
+
+/* SHELL */
+#appShell{display:none}
+.shell{display:flex;min-height:100vh}
+.sidebar{width:230px;background:var(--text);color:#fff;display:flex;flex-direction:column;flex-shrink:0;position:sticky;top:0;height:100vh;overflow-y:auto}
+.logo{padding:22px 20px 16px;border-bottom:1px solid rgba(255,255,255,0.1)}
+.logo-title{font-family:'DM Serif Display',serif;font-size:22px;color:#fff}
+.logo-sub{font-size:11px;color:rgba(255,255,255,0.4);margin-top:2px;letter-spacing:.5px;text-transform:uppercase}
+.role-pill{display:inline-block;margin-top:7px;font-size:11px;font-weight:600;padding:2px 9px;border-radius:10px}
+.role-pill.admin{background:var(--accent)}
+.role-pill.employee{background:var(--blue)}
+.nav{padding:14px 10px;flex:1}
+.nav-sep{height:1px;background:rgba(255,255,255,0.08);margin:8px 12px}
+.nav-sec{font-size:10px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:rgba(255,255,255,0.3);padding:8px 14px 4px}
+.nav-item{display:flex;align-items:center;gap:11px;padding:9px 14px;border-radius:var(--radius-sm);cursor:pointer;color:rgba(255,255,255,0.6);font-size:13.5px;transition:all .15s;margin-bottom:2px}
+.nav-item:hover{background:rgba(255,255,255,0.08);color:#fff}
+.nav-item.active{background:var(--accent);color:#fff;font-weight:500}
+.nav-icon{font-size:15px;width:20px;text-align:center}
+.sf{padding:14px 16px;border-top:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;gap:10px}
+.sf-av{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;flex-shrink:0}
+.sf-name{font-size:13px;font-weight:500;color:#fff;line-height:1.2}
+.sf-role{font-size:11px;color:rgba(255,255,255,0.4)}
+.sf-out{margin-left:auto;background:none;border:none;color:rgba(255,255,255,0.4);cursor:pointer;font-size:18px;padding:4px;transition:color .15s}
+.sf-out:hover{color:#fff}
+.main{flex:1;overflow-x:hidden}
+.topbar{background:var(--surface);border-bottom:1px solid var(--border);padding:14px 30px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:10}
+.topbar-title{font-family:'DM Serif Display',serif;font-size:20px}
+.dbadge{font-size:12px;color:var(--text2);background:var(--surface2);border:1px solid var(--border);padding:5px 12px;border-radius:20px}
+.content{padding:28px 30px}
+
+/* CARDS */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow)}
+.card-title{font-family:'DM Serif Display',serif;font-size:17px;margin-bottom:16px}
+
+/* STATS */
+.sg{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px}
+.sc{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow)}
+.sl{font-size:12px;color:var(--text2);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px}
+.sv{font-family:'DM Serif Display',serif;font-size:30px}
+.ss{font-size:12px;color:var(--text2);margin-top:4px}
+.sc.g{border-left:4px solid var(--accent)}.sc.r{border-left:4px solid var(--danger)}
+.sc.b{border-left:4px solid var(--blue)}.sc.w{border-left:4px solid var(--warn)}
+
+/* TABLES */
+.tw{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+th{text-align:left;padding:10px 14px;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.6px;color:var(--text2);background:var(--surface2);border-bottom:1px solid var(--border)}
+td{padding:11px 14px;border-bottom:1px solid var(--border);vertical-align:middle}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:var(--surface2)}
+
+/* BADGES */
+.badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:11.5px;font-weight:500}
+.bg{background:var(--accent-light);color:var(--accent)}.br{background:var(--danger-light);color:var(--danger)}
+.bb{background:var(--blue-light);color:var(--blue)}.bw{background:var(--warn-light);color:#9a7000}
+.bgr{background:var(--surface2);color:var(--text2)}
+
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;gap:6px;padding:9px 18px;border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:13.5px;font-weight:500;cursor:pointer;border:none;transition:all .15s}
+.bp{background:var(--accent);color:#fff}.bp:hover{background:var(--accent2)}
+.bo{background:transparent;border:1px solid var(--border);color:var(--text)}.bo:hover{background:var(--surface2)}
+.bs{padding:5px 12px;font-size:12.5px}
+.bci{background:var(--accent);color:#fff;padding:13px 28px;font-size:15px;border-radius:var(--radius)}
+.bco{background:var(--danger);color:#fff;padding:13px 28px;font-size:15px;border-radius:var(--radius)}
+
+/* FORM */
+.fg{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.fi{display:flex;flex-direction:column;gap:6px}
+.fi.full{grid-column:1/-1}
+label{font-size:12.5px;font-weight:500;color:var(--text2)}
+input,select,textarea{padding:9px 13px;border:1px solid var(--border);border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:13.5px;background:var(--surface);color:var(--text);outline:none;transition:border-color .15s}
+input:focus,select:focus,textarea:focus{border-color:var(--accent2)}
+textarea{resize:vertical;min-height:80px}
+
+/* MODAL */
+.mbg{display:none;position:fixed;inset:0;background:rgba(26,24,20,.45);z-index:100;align-items:center;justify-content:center}
+.mbg.open{display:flex}
+.modal{background:var(--surface);border-radius:var(--radius);padding:28px;width:520px;max-width:95vw;box-shadow:var(--shadow-lg);max-height:90vh;overflow-y:auto}
+.mh{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+.mt{font-family:'DM Serif Display',serif;font-size:20px}
+.mc{cursor:pointer;font-size:20px;color:var(--text2);background:none;border:none}
+
+/* CHECKIN */
+.cp{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:32px;display:flex;flex-direction:column;align-items:center;gap:14px;box-shadow:var(--shadow);margin-bottom:24px}
+.ck{font-family:'DM Serif Display',serif;font-size:48px}
+.cd{font-size:14px;color:var(--text2)}
+
+/* SALARY ROW */
+.sr{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border);font-size:13.5px}
+.sr:last-child{border-bottom:none}
+.sr.tot{font-weight:600;font-size:15px}
+
+/* MISC */
+.sh{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;flex-wrap:wrap;gap:10px}
+.st{font-family:'DM Serif Display',serif;font-size:20px}
+.av{width:30px;height:30px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:#fff;flex-shrink:0}
+.enc{display:flex;align-items:center;gap:9px}
+.sb{display:flex;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:7px 13px;width:220px}
+.sb input{border:none;padding:0;font-size:13px;width:100%}
+.tc{position:fixed;bottom:24px;right:24px;z-index:200;display:flex;flex-direction:column;gap:8px}
+.toast{background:var(--text);color:#fff;padding:12px 18px;border-radius:var(--radius-sm);font-size:13px;box-shadow:var(--shadow-lg);animation:si .2s ease;max-width:300px}
+.toast.success{background:var(--accent)}.toast.error{background:var(--danger)}
+@keyframes si{from{transform:translateX(100%);opacity:0}to{transform:translateX(0);opacity:1}}
+.es{text-align:center;padding:40px;color:var(--text2);font-size:14px}
+.es .ic{font-size:36px;margin-bottom:10px}
+.dv{height:1px;background:var(--border);margin:20px 0}
+.fr{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.mla{margin-left:auto}
+.ts{font-size:12px}.tm{color:var(--text2)}
+.mb16{margin-bottom:16px}.mb24{margin-bottom:24px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+
+/* REPORT TABS */
+.rt{padding:10px 18px;border:none;background:transparent;font-family:'DM Sans',sans-serif;font-size:13.5px;font-weight:500;color:var(--text2);cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px;transition:all .15s}
+.rt:hover{color:var(--text)}.rt.active{color:var(--accent);border-bottom-color:var(--accent)}
+.br-row{display:flex;align-items:center;gap:10px;margin-bottom:10px;font-size:13px}
+.br-lbl{width:130px;flex-shrink:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.br-trk{flex:1;background:var(--surface2);border-radius:20px;height:10px;overflow:hidden}
+.br-fill{height:100%;border-radius:20px}
+.br-pct{width:40px;text-align:right;font-size:12px;color:var(--text2);flex-shrink:0}
+
+/* CALENDAR */
+.cg{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-top:10px}
+.cdh{text-align:center;font-size:11px;font-weight:600;color:var(--text2);padding:4px 0;text-transform:uppercase}
+.cday{aspect-ratio:1;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:500}
+.cday.present{background:var(--accent-light);color:var(--accent)}
+.cday.absent{background:var(--danger-light);color:var(--danger)}
+.cday.leave{background:var(--warn-light);color:#9a7000}
+.cday.weekend{background:var(--surface2);color:var(--text2);opacity:.5}
+.cday.empty{background:transparent}
+
+/* PROFILE */
+.ph{display:flex;align-items:center;gap:20px;margin-bottom:20px}
+.pav{width:70px;height:70px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:700;color:#fff}
+.pn{font-family:'DM Serif Display',serif;font-size:22px}
+.pm{font-size:13px;color:var(--text2);margin-top:3px}
+.ig{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.il{font-size:11.5px;font-weight:600;color:var(--text2);text-transform:uppercase;letter-spacing:.4px;margin-bottom:4px}
+.iv{font-size:14px;font-weight:500}
+
+.notice{background:var(--blue-light);border:1px solid #b3c6ff;border-radius:var(--radius-sm);padding:12px 16px;font-size:13px;color:var(--blue);margin-bottom:18px}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="loginScreen">
+  <div class="login-box">
+    <div class="login-logo">Svsm Spencer Plaza</div>
+    <div class="login-tagline">Employee Attendance Management System</div>
+    <div class="role-tabs">
+      <button class="role-tab active" onclick="setRole('admin')" id="rtAdmin">🔐 Admin</button>
+      <button class="role-tab" onclick="setRole('employee')" id="rtEmp">👤 Employee</button>
+    </div>
+    <div id="loginErr" class="login-error"></div>
+    <div class="login-field"><label>Username / Employee Email</label><input type="text" id="lUser" placeholder="Enter username" onkeydown="if(event.key==='Enter')doLogin()"></div>
+    <div class="login-field"><label>Password</label><input type="password" id="lPass" placeholder="Enter password" onkeydown="if(event.key==='Enter')doLogin()"></div>
+    <button class="login-btn" onclick="doLogin()">Sign In →</button>
+    <div class="Address-shop">
+      <b>S.V.S.M SPENCER PLAZA,</b> Shop No: G-14, A-Block, Ground Floor, Guptas Square, Beside Satyam Theater, 60Ft. Road, ONGOLE - 523002. Cell - 9848113108 
+    </div>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="appShell">
+  <div class="shell">
+    <aside class="sidebar">
+      <div class="logo">
+        <div class="logo-title">Svsm Spencer Plaza</div>
+        <div class="logo-sub">Attendance System</div>
+        <span class="role-pill" id="rolePill">Admin</span>
+      </div>
+      <nav class="nav" id="sNav"></nav>
+      <div class="sf">
+        <div class="sf-av" id="sfAv"></div>
+        <div><div class="sf-name" id="sfNm"></div><div class="sf-role" id="sfRl"></div></div>
+        <button class="sf-out" onclick="doLogout()" title="Logout">⎋</button>
+      </div>
+    </aside>
+    <div class="main">
+      <div class="topbar">
+        <div class="topbar-title" id="pgTitle">Dashboard</div>
+        <div class="dbadge" id="topDate"></div>
+      </div>
+      <div class="content" id="appC"></div>
+    </div>
+  </div>
+</div>
+
+<!-- MODALS -->
+<div class="mbg" id="mEmp">
+  <div class="modal">
+    <div class="mh"><div class="mt" id="empMT">Add Employee</div><button class="mc" onclick="cm('mEmp')">✕</button></div>
+    <div class="fg">
+      <div class="fi"><label>Full Name *</label><input type="text" id="ef-name" placeholder="John Doe"></div>
+      <div class="fi"><label>Email *</label><input type="email" id="ef-email" placeholder="john@company.com"></div>
+      <div class="fi"><label>Department</label><select id="ef-dept"><option>Office</option><option>Field</option></select></div>
+      <div class="fi"><label>Position</label><input type="text" id="ef-pos" placeholder="Software Engineer"></div>
+      <div class="fi"><label>Base Salary (₹)</label><input type="number" id="ef-sal" placeholder="50000"></div>
+      <div class="fi"><label>Join Date</label><input type="date" id="ef-jd"></div>
+      <div class="fi"><label>Phone</label><input type="tel" id="ef-ph" placeholder="+91 99999 99999"></div>
+      <div class="fi"><label>Status</label><select id="ef-st"><option value="active">Active</option><option value="inactive">Inactive</option></select></div>
+      <div class="fi full"><label>Employee Login Password</label><input type="text" id="ef-pw" placeholder="Default: emp123"></div>
+    </div>
+    <div class="dv"></div>
+    <div class="fr"><button class="btn bp mla" onclick="saveEmp()">Save Employee</button><button class="btn bo" onclick="cm('mEmp')">Cancel</button></div>
+  </div>
+</div>
+
+<div class="mbg" id="mLeave">
+  <div class="modal">
+    <div class="mh"><div class="mt">Leave Request</div><button class="mc" onclick="cm('mLeave')">✕</button></div>
+    <div class="fg">
+      <div class="fi full" id="lfEmpRow"><label>Employee</label><select id="lf-emp"></select></div>
+      <div class="fi"><label>Leave Type</label><select id="lf-type"><option>Sick Leave</option><option>Casual Leave</option><option>Annual Leave</option><option>Maternity Leave</option><option>Emergency Leave</option><option>Other</option></select></div>
+      <div class="fi"><label>From Date</label><input type="date" id="lf-from"></div>
+      <div class="fi"><label>To Date</label><input type="date" id="lf-to"></div>
+      <div class="fi full"><label>Reason</label><textarea id="lf-reason" placeholder="Reason for leave..."></textarea></div>
+    </div>
+    <div class="dv"></div>
+    <div class="fr"><button class="btn bp mla" onclick="saveLeave()">Submit</button><button class="btn bo" onclick="cm('mLeave')">Cancel</button></div>
+  </div>
+</div>
+
+<div class="mbg" id="mSal">
+  <div class="modal">
+    <div class="mh"><div class="mt">Salary Slip</div><button class="mc" onclick="cm('mSal')">✕</button></div>
+    <div id="salSlip"></div>
+  </div>
+</div>
+
+<div class="tc" id="toasts"></div>
+
+<script>
+// ══════════════════════════════════════════════════════════════
+//  STORAGE — reads/writes attendance-data.json via api.php
+//  Upload both files to your hosting (Hostinger / GoDaddy etc.)
+//  in the same folder. No configuration needed.
+// ══════════════════════════════════════════════════════════════
+
+const API = 'api.php';
+
+// Load all data from server JSON file
+async function loadData() {
+  try {
+    const res = await fetch(API + '?t=' + Date.now()); // cache-bust
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    return await res.json();
+  } catch(e) {
+    console.error('loadData:', e);
+    return null;
+  }
+}
+
+// Save all data to server JSON file (debounced)
+async function saveData() {
+  try {
+    const res = await fetch(API, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ employees, attendance, leaves })
+    });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+  } catch(e) {
+    console.error('saveData:', e);
+    toast('⚠️ Save failed — check api.php is uploaded correctly', 'error');
+  }
+}
+
+let _saveTimer = null;
+function save() {
+  // Debounce: batch rapid changes into one write (300 ms)
+  clearTimeout(_saveTimer);
+  _saveTimer = setTimeout(saveData, 300);
+}
+
+// ── STATE ──
+let employees  = [];
+let attendance = [];
+let leaves     = [];
+let cu         = null;
+let loginRole  = 'admin';
+let editEmpId  = null;
+let activeTab  = 'monthly';
+
+// ── HELPERS ──
+const tod=()=>new Date().toISOString().split('T')[0];
+const nT=()=>new Date().toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit',hour12:true});
+const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2);
+const COLS=['#2D6A4F','#1B4FD8','#C1121F','#D4A017','#6B3FA0','#1B7A8A','#D46A17'];
+const ec=n=>COLS[n.charCodeAt(0)%COLS.length];
+const ini=n=>n.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
+const dB=(f,t)=>Math.max(0,Math.round((new Date(t)-new Date(f))/864e5)+1);
+const cM=()=>{const n=new Date();return`${n.getFullYear()}-${String(n.getMonth()+1).padStart(2,'0')}`};
+function cH(i,o){if(!i||!o)return'—';const p=t=>{const[tm,ap]=t.split(' ');let[h,m]=tm.split(':').map(Number);if(ap==='PM'&&h!==12)h+=12;if(ap==='AM'&&h===12)h=0;return h*60+m};const d=p(o)-p(i);if(d<=0)return'—';return`${Math.floor(d/60)}h ${d%60}m`;}
+function getWD(month){const[yr,mo]=month.split('-').map(Number),dim=new Date(yr,mo,0).getDate();let w=0;for(let d=1;d<=dim;d++){const day=new Date(yr,mo-1,d).getDay();if(day&&day!==6)w++;}return w;}
+function toast(msg,type='success'){const el=document.createElement('div');el.className=`toast ${type}`;el.textContent=msg;document.getElementById('toasts').appendChild(el);setTimeout(()=>el.remove(),3500);}
+function cm(id){document.getElementById(id).classList.remove('open');}
+document.addEventListener('click',e=>{if(e.target.classList.contains('mbg'))e.target.classList.remove('open');});
+
+// ── SEED (used only on very first run when JSON file is empty) ──
+const SEED = [
+  {id:uid(),name:'Upendra',email:'Uppu@company.com',dept:'Field',position:'Senior Technician',salary:85000,joinDate:'2022-03-15',phone:'+91 98765 43210',status:'active',pass:'emp123'},
+  
+];
+
+// ── BOOT: fetch JSON from server, then reveal the login screen ──
+(async () => {
+  // Hide login while loading
+  const ls = document.getElementById('loginScreen');
+  ls.style.display = 'none';
+
+  // Spinner overlay
+  const ov = document.createElement('div');
+  ov.style.cssText = 'position:fixed;inset:0;background:linear-gradient(135deg,#1A1814,#2D6A4F);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999;color:#fff;gap:14px';
+  ov.innerHTML = '<div style="font-family:\'DM Serif Display\',serif;font-size:32px">Svsm Spencer Plaza</div>'
+               + '<div style="font-size:13px;opacity:.55;letter-spacing:.5px">Loading data…</div>';
+  document.body.appendChild(ov);
+
+  const data = await loadData();
+  ov.remove();
+  ls.style.display = 'flex';
+
+  if (data === null) {
+    // api.php unreachable — show error banner, app still usable with seed data
+    const banner = document.createElement('div');
+    banner.style.cssText = 'position:fixed;top:0;left:0;right:0;background:#C1121F;color:#fff;text-align:center;padding:10px 16px;font-size:13px;z-index:8888;line-height:1.6';
+    banner.innerHTML = '⚠️ <b>Could not reach api.php.</b> Make sure both files are uploaded to the same folder on your hosting.';
+    document.body.prepend(banner);
+    employees = SEED; attendance = []; leaves = [];
+  } else {
+    employees  = (data.employees  && data.employees.length)  ? data.employees  : SEED;
+    attendance = data.attendance || [];
+    leaves     = data.leaves     || [];
+    // Persist seed on first run
+    if (!data.employees || !data.employees.length) save();
+  }
+})()
+
+// ── CLOCK ──
+function tick(){
+  const n=new Date();
+  const cl=document.getElementById('lClock');if(cl)cl.textContent=n.toLocaleTimeString('en-IN');
+  const ld=document.getElementById('lDate');if(ld)ld.textContent=n.toLocaleDateString('en-IN',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+  const td=document.getElementById('topDate');if(td)td.textContent=n.toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'});
+}
+setInterval(tick,1000);
+
+// ── LOGIN ──
+function setRole(r){
+  loginRole=r;
+  document.getElementById('rtAdmin').classList.toggle('active',r==='admin');
+  document.getElementById('rtEmp').classList.toggle('active',r==='employee');
+}
+
+function doLogin(){
+  const u=document.getElementById('lUser').value.trim();
+  const p=document.getElementById('lPass').value;
+  const err=document.getElementById('loginErr');
+  err.style.display='none';
+  if(loginRole==='admin'){
+    if(u==='admin'&&p==='admin123'){cu={role:'admin',name:'Administrator',id:'admin'};launch();}
+    else{err.textContent='Invalid admin credentials.';err.style.display='block';}
+  } else {
+    const emp=employees.find(e=>(e.email.split('@')[0].toLowerCase()===u.toLowerCase()||e.email.toLowerCase()===u.toLowerCase())&&(e.pass||'emp123')===p&&e.status==='active');
+    if(emp){cu={role:'employee',name:emp.name,id:'emp',empId:emp.id};launch();}
+    else{err.textContent='Invalid credentials or account inactive.';err.style.display='block';}
+  }
+}
+
+function doLogout(){
+  cu=null;
+  document.getElementById('loginScreen').style.display='flex';
+  document.getElementById('appShell').style.display='none';
+  document.getElementById('lUser').value='';
+  document.getElementById('lPass').value='';
+  document.getElementById('loginErr').style.display='none';
+}
+
+function launch(){
+  document.getElementById('loginScreen').style.display='none';
+  document.getElementById('appShell').style.display='block';
+  const pill=document.getElementById('rolePill');
+  pill.textContent=cu.role==='admin'?'Admin':'Employee';
+  pill.className='role-pill '+(cu.role==='admin'?'admin':'employee');
+  const emp=cu.role==='employee'?employees.find(e=>e.id===cu.empId):null;
+  const name=emp?emp.name:'Administrator';
+  const role=emp?emp.position+' · '+emp.dept:'System Admin';
+  document.getElementById('sfNm').textContent=name;
+  document.getElementById('sfRl').textContent=role;
+  const av=document.getElementById('sfAv');av.textContent=ini(name);av.style.background=ec(name);
+  buildNav();tick();
+}
+
+// ── NAV ──
+const adminNav=[
+  {id:'a-dash',icon:'📊',label:'Dashboard'},
+  {id:'a-ci',icon:'🕐',label:'Check-In / Out'},
+  {sep:true,sec:'Manage'},
+  {id:'a-emp',icon:'👥',label:'Employees'},
+  {id:'a-att',icon:'📋',label:'Attendance'},
+  {id:'a-lv',icon:'🌿',label:'Leave Requests'},
+  {id:'a-sal',icon:'💰',label:'Salary'},
+  {sep:true,sec:'Analytics'},
+  {id:'a-rpt',icon:'📈',label:'Reports'},
+];
+const empNav=[
+  {id:'e-dash',icon:'🏠',label:'My Dashboard'},
+  {id:'e-ci',icon:'🕐',label:'Check-In / Out'},
+  {sep:true,sec:'My Records'},
+  {id:'e-att',icon:'📋',label:'My Attendance'},
+  {id:'e-lv',icon:'🌿',label:'My Leaves'},
+  {id:'e-sal',icon:'💰',label:'My Salary'},
+  {id:'e-pro',icon:'👤',label:'My Profile'},
+];
+const pgTitles={'a-dash':'Dashboard','a-ci':'Check-In / Out','a-emp':'Employees','a-att':'Attendance','a-lv':'Leave Requests','a-sal':'Salary','a-rpt':'Reports','e-dash':'My Dashboard','e-ci':'Check-In / Out','e-att':'My Attendance','e-lv':'My Leaves','e-sal':'My Salary','e-pro':'My Profile'};
+
+function buildNav(){
+  const nav=cu.role==='admin'?adminNav:empNav;
+  let h='';
+  nav.forEach(x=>{
+    if(x.sep)h+=`<div class="nav-sep"></div><div class="nav-sec">${x.sec}</div>`;
+    else h+=`<div class="nav-item" id="ni-${x.id}" onclick="showPg('${x.id}')"><span class="nav-icon">${x.icon}</span>${x.label}</div>`;
+  });
+  document.getElementById('sNav').innerHTML=h;
+  showPg(nav.find(x=>x.id).id);
+}
+
+function showPg(id){
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  const ni=document.getElementById('ni-'+id);if(ni)ni.classList.add('active');
+  document.getElementById('pgTitle').textContent=pgTitles[id]||id;
+  buildPg(id);
+}
+
+function defMonth(id){const el=document.getElementById(id);if(el&&!el.value)el.value=cM();}
+
+// ── PAGE BUILDER ──
+function buildPg(id){
+  const c=document.getElementById('appC');
+  if(id==='a-dash'){c.innerHTML=aDashH();renderADash();}
+  else if(id==='a-ci'){c.innerHTML=aCIH();renderACILog();populateCISel();}
+  else if(id==='a-emp'){c.innerHTML=aEmpH();renderEmps();}
+  else if(id==='a-att'){c.innerHTML=aAttH();defMonth('rMonth');popRepFlt();renderAttRep();}
+  else if(id==='a-lv'){c.innerHTML=aLvH();renderALv();}
+  else if(id==='a-sal'){c.innerHTML=aSalH();defMonth('salM');renderASal();}
+  else if(id==='a-rpt'){c.innerHTML=aRptH();defMonth('rptM');activeTab='monthly';renderRpts();}
+  else if(id==='e-dash'){c.innerHTML=eDashH();renderEDash();}
+  else if(id==='e-ci'){c.innerHTML=eCIH();renderECI();}
+  else if(id==='e-att'){c.innerHTML=eAttH();defMonth('eaM');renderEAtt();}
+  else if(id==='e-lv'){c.innerHTML=eLvH();renderELv();}
+  else if(id==='e-sal'){c.innerHTML=eSalH();defMonth('esM');renderESal();}
+  else if(id==='e-pro'){c.innerHTML=eProH();renderEPro();}
+  tick();
+}
+
+// ════════════════ ADMIN HTML ════════════════
+function aDashH(){return`<div class="sg"><div class="sc g"><div class="sl">Total Employees</div><div class="sv" id="ds-t">0</div><div class="ss">Active staff</div></div><div class="sc b"><div class="sl">Present Today</div><div class="sv" id="ds-p">0</div><div class="ss">Checked in</div></div><div class="sc r"><div class="sl">Absent Today</div><div class="sv" id="ds-a">0</div><div class="ss">Not checked in</div></div><div class="sc w"><div class="sl">Pending Leaves</div><div class="sv" id="ds-l">0</div><div class="ss">Awaiting approval</div></div></div><div class="g2"><div class="card"><div class="card-title">Today's Attendance</div><div class="tw"><table><thead><tr><th>Employee</th><th>Check In</th><th>Check Out</th><th>Status</th></tr></thead><tbody id="ds-tb"></tbody></table></div></div><div class="card"><div class="card-title">Recent Leave Requests</div><div id="ds-rl"></div></div></div>`;}
+
+function aCIH(){return`<div class="cp"><div class="ck" id="lClock">--:--:--</div><div class="cd" id="lDate"></div><div class="fi" style="width:260px"><label>Select Employee</label><select id="ciSel"></select></div><div class="fr"><button class="bci" onclick="doACI()">✅ Check In</button><button class="bco" onclick="doACO()">🚪 Check Out</button></div><div class="cd" id="ciSt">Select an employee to check in or out.</div></div><div class="card"><div class="card-title">Today's Log</div><div class="tw"><table><thead><tr><th>Employee</th><th>Check In</th><th>Check Out</th><th>Hours</th><th>Status</th></tr></thead><tbody id="ciLog"></tbody></table></div></div>`;}
+
+function aEmpH(){return`<div class="sh"><div class="st">Employees</div><button class="btn bp" onclick="openAddEmp()">+ Add Employee</button></div><div class="card"><div class="fr mb16"><div class="sb"><span>🔍</span><input type="text" id="eSearch" placeholder="Search..." oninput="renderEmps()"></div></div><div class="tw"><table><thead><tr><th>Name</th><th>Department</th><th>Position</th><th>Base Salary</th><th>Join Date</th><th>Status</th><th>Actions</th></tr></thead><tbody id="eTb"></tbody></table></div></div>`;}
+
+function aAttH(){return`<div class="sh"><div class="st">Attendance Report</div><div class="fr"><input type="month" id="rMonth" onchange="renderAttRep()" style="padding:8px 12px"><select id="rEmpF" onchange="renderAttRep()" style="padding:8px 12px;width:180px"><option value="">All Employees</option></select></div></div><div class="card"><div class="tw"><table><thead><tr><th>Employee</th><th>Date</th><th>Check In</th><th>Check Out</th><th>Hours</th><th>Status</th></tr></thead><tbody id="aRTb"></tbody></table></div></div>`;}
+
+function aLvH(){return`<div class="sh"><div class="st">Leave Requests</div><button class="btn bp" onclick="openLv(true)">+ New Request</button></div><div class="card"><div class="tw"><table><thead><tr><th>Employee</th><th>Type</th><th>From</th><th>To</th><th>Days</th><th>Reason</th><th>Status</th><th>Actions</th></tr></thead><tbody id="aLTb"></tbody></table></div></div>`;}
+
+function aSalH(){return`<div class="sh"><div class="st">Salary Management</div><input type="month" id="salM" onchange="renderASal()" style="padding:8px 12px"></div><div class="card"><div class="tw"><table><thead><tr><th>Employee</th><th>Base Salary</th><th>Working Days</th><th>Present</th><th>Deductions</th><th>Net Salary</th><th>Actions</th></tr></thead><tbody id="sTb"></tbody></table></div></div>`;}
+
+function aRptH(){return`<div class="sh"><div class="st">Reports</div><div class="fr"><input type="month" id="rptM" onchange="renderRpts()" style="padding:8px 12px"><button class="btn bp" onclick="window.print()">🖨️ Print</button></div></div><div style="display:flex;gap:4px;margin-bottom:20px;border-bottom:2px solid var(--border);flex-wrap:wrap"><button class="rt active" id="rt-monthly" onclick="swTab('monthly')">📅 Monthly Summary</button><button class="rt" id="rt-employee" onclick="swTab('employee')">👤 Employee-wise</button><button class="rt" id="rt-leave" onclick="swTab('leave')">🌿 Leave Summary</button><button class="rt" id="rt-salary" onclick="swTab('salary')">💰 Salary Report</button></div><div id="rp-monthly"></div><div id="rp-employee" style="display:none"></div><div id="rp-leave" style="display:none"></div><div id="rp-salary" style="display:none"></div>`;}
+
+// ════════════════ EMPLOYEE HTML ════════════════
+function eDashH(){const e=myE();if(!e)return'';return`<div class="notice">👋 Welcome back, <b>${e.name}</b>! Here's your attendance overview for ${new Date().toLocaleString('en-IN',{month:'long',year:'numeric'})}.</div><div class="sg"><div class="sc g"><div class="sl">Present Days</div><div class="sv" id="ep-p">—</div><div class="ss">this month</div></div><div class="sc r"><div class="sl">Absent Days</div><div class="sv" id="ep-a">—</div></div><div class="sc b"><div class="sl">Attendance Rate</div><div class="sv" id="ep-r">—</div></div><div class="sc w"><div class="sl">Leave Balance</div><div class="sv" id="ep-l">—</div><div class="ss">days remaining</div></div></div><div class="g2"><div class="card"><div class="card-title">This Month's Calendar</div><div id="eCal"></div></div><div class="card"><div class="card-title">Recent Leaves</div><div id="eRL"></div></div></div>`;}
+
+function eCIH(){return`<div class="cp"><div class="ck" id="lClock">--:--:--</div><div class="cd" id="lDate"></div><div id="eCIInfo" style="font-size:14px;font-weight:500;padding:8px 18px;border-radius:var(--radius-sm);background:var(--surface2)">Loading...</div><div class="fr"><button class="bci" onclick="doECI()">✅ Check In</button><button class="bco" onclick="doECO()">🚪 Check Out</button></div></div><div class="card"><div class="card-title">Today's Record</div><div class="tw"><table><thead><tr><th>Date</th><th>Check In</th><th>Check Out</th><th>Hours</th><th>Status</th></tr></thead><tbody id="eCITb"></tbody></table></div></div>`;}
+
+function eAttH(){return`<div class="sh"><div class="st">My Attendance</div><input type="month" id="eaM" onchange="renderEAtt()" style="padding:8px 12px"></div><div class="sg" id="eaSg"></div><div class="card mb24"><div class="card-title">Calendar View</div><div id="eaCal"></div></div><div class="card"><div class="card-title">Attendance Log</div><div class="tw"><table><thead><tr><th>Date</th><th>Check In</th><th>Check Out</th><th>Hours</th><th>Status</th></tr></thead><tbody id="eaTb"></tbody></table></div></div>`;}
+
+function eLvH(){return`<div class="sh"><div class="st">My Leaves</div><button class="btn bp" onclick="openLv(false)">+ Apply Leave</button></div><div class="card"><div class="tw"><table><thead><tr><th>Type</th><th>From</th><th>To</th><th>Days</th><th>Reason</th><th>Status</th></tr></thead><tbody id="eLTb"></tbody></table></div></div>`;}
+
+function eSalH(){return`<div class="sh"><div class="st">My Salary</div><input type="month" id="esM" onchange="renderESal()" style="padding:8px 12px"></div><div class="sg" id="esSg"></div><div class="card" id="esSlip"></div>`;}
+
+function eProH(){return`<div class="st mb16">My Profile</div><div class="card" id="ePro"></div>`;}
+
+// ════════════════ ADMIN RENDER ════════════════
+function renderADash(){
+  const ts=tod(),tr=attendance.filter(a=>a.date===ts);
+  const ae=employees.filter(e=>e.status==='active');
+  const ci=[...new Set(tr.map(a=>a.empId))];
+  document.getElementById('ds-t').textContent=ae.length;
+  document.getElementById('ds-p').textContent=ci.length;
+  document.getElementById('ds-a').textContent=Math.max(0,ae.length-ci.length);
+  document.getElementById('ds-l').textContent=leaves.filter(l=>l.status==='pending').length;
+  document.getElementById('ds-tb').innerHTML=ae.length
+    ?ae.map(e=>{const r=tr.find(a=>a.empId===e.id);const st=r?(r.checkOut?'Completed':'Present'):'Absent';const b=r?(r.checkOut?'bg':'bb'):'br';
+      return`<tr><td><div class="enc"><div class="av" style="background:${ec(e.name)}">${ini(e.name)}</div>${e.name}</div></td><td>${r?r.checkIn:'—'}</td><td>${r&&r.checkOut?r.checkOut:'—'}</td><td><span class="badge ${b}">${st}</span></td></tr>`;}).join('')
+    :'<tr><td colspan="4"><div class="es">No employees</div></td></tr>';
+  const rl=[...leaves].reverse().slice(0,5);
+  document.getElementById('ds-rl').innerHTML=rl.length
+    ?rl.map(l=>{const e=employees.find(x=>x.id===l.empId);const b=l.status==='approved'?'bg':l.status==='rejected'?'br':'bw';
+      return`<div class="sr"><div><div style="font-weight:500">${e?.name||'—'}</div><div class="ts tm">${l.type} · ${l.from}</div></div><span class="badge ${b}">${l.status}</span></div>`;}).join('')
+    :'<div class="es"><div class="ic">🌿</div>No requests</div>';
+}
+
+function populateCISel(){const s=document.getElementById('ciSel');if(!s)return;s.innerHTML=employees.filter(e=>e.status==='active').map(e=>`<option value="${e.id}">${e.name}</option>`).join('');}
+
+function doACI(){
+  const id=document.getElementById('ciSel')?.value;if(!id)return;
+  if(attendance.find(a=>a.empId===id&&a.date===tod()))return toast('Already checked in!','error');
+  attendance.push({id:uid(),empId:id,date:tod(),checkIn:nT(),checkOut:null});save();renderACILog();
+  toast(employees.find(e=>e.id===id)?.name+' checked in');
+  document.getElementById('ciSt').textContent='Checked in at '+nT();
+}
+function doACO(){
+  const id=document.getElementById('ciSel')?.value;if(!id)return;
+  const r=attendance.find(a=>a.empId===id&&a.date===tod()&&!a.checkOut);
+  if(!r)return toast('No active check-in','error');
+  r.checkOut=nT();save();renderACILog();toast(employees.find(e=>e.id===id)?.name+' checked out');
+  document.getElementById('ciSt').textContent='Checked out at '+nT();
+}
+function renderACILog(){
+  const tb=document.getElementById('ciLog');if(!tb)return;
+  const rs=attendance.filter(a=>a.date===tod());
+  tb.innerHTML=rs.length?rs.map(r=>{const e=employees.find(x=>x.id===r.empId);
+    return`<tr><td><div class="enc"><div class="av" style="background:${ec(e?.name||'?')}">${ini(e?.name||'?')}</div>${e?.name||'—'}</div></td><td>${r.checkIn}</td><td>${r.checkOut||'—'}</td><td>${cH(r.checkIn,r.checkOut)}</td><td><span class="badge ${r.checkOut?'bg':'bb'}">${r.checkOut?'Complete':'Active'}</span></td></tr>`;}).join('')
+  :'<tr><td colspan="5"><div class="es"><div class="ic">🕐</div>No check-ins today</div></td></tr>';
+}
+
+function openAddEmp(){
+  editEmpId=null;document.getElementById('empMT').textContent='Add Employee';
+  ['name','email','pos','ph'].forEach(f=>document.getElementById('ef-'+f).value='');
+  document.getElementById('ef-dept').value='Engineering';document.getElementById('ef-sal').value='';
+  document.getElementById('ef-jd').value=tod();document.getElementById('ef-st').value='active';
+  document.getElementById('ef-pw').value='';document.getElementById('mEmp').classList.add('open');
+}
+function editEmp(id){
+  const e=employees.find(x=>x.id===id);if(!e)return;editEmpId=id;
+  document.getElementById('empMT').textContent='Edit Employee';
+  document.getElementById('ef-name').value=e.name;document.getElementById('ef-email').value=e.email;
+  document.getElementById('ef-dept').value=e.dept;document.getElementById('ef-pos').value=e.position;
+  document.getElementById('ef-sal').value=e.salary;document.getElementById('ef-jd').value=e.joinDate||'';
+  document.getElementById('ef-ph').value=e.phone||'';document.getElementById('ef-st').value=e.status;
+  document.getElementById('ef-pw').value=e.pass||'emp123';document.getElementById('mEmp').classList.add('open');
+}
+function saveEmp(){
+  const name=document.getElementById('ef-name').value.trim();
+  const email=document.getElementById('ef-email').value.trim();
+  if(!name||!email)return toast('Name and email required','error');
+  const d={name,email,dept:document.getElementById('ef-dept').value,position:document.getElementById('ef-pos').value.trim(),
+    salary:parseFloat(document.getElementById('ef-sal').value)||0,joinDate:document.getElementById('ef-jd').value,
+    phone:document.getElementById('ef-ph').value.trim(),status:document.getElementById('ef-st').value,
+    pass:document.getElementById('ef-pw').value||'emp123'};
+  if(editEmpId){const i=employees.findIndex(e=>e.id===editEmpId);employees[i]={...employees[i],...d};toast('Updated');}
+  else{employees.push({id:uid(),...d});toast('Employee added');}
+  save();cm('mEmp');renderEmps();
+}
+function delEmp(id){if(!confirm('Delete?'))return;employees=employees.filter(e=>e.id!==id);save();renderEmps();toast('Deleted');}
+function renderEmps(){
+  const q=(document.getElementById('eSearch')?.value||'').toLowerCase();
+  const fl=employees.filter(e=>e.name.toLowerCase().includes(q)||e.dept.toLowerCase().includes(q)||e.position.toLowerCase().includes(q));
+  const tb=document.getElementById('eTb');if(!tb)return;
+  tb.innerHTML=fl.length?fl.map(e=>`<tr>
+    <td><div class="enc"><div class="av" style="background:${ec(e.name)}">${ini(e.name)}</div><div><div style="font-weight:500">${e.name}</div><div class="ts tm">${e.email}</div></div></div></td>
+    <td>${e.dept}</td><td>${e.position}</td><td>₹${e.salary.toLocaleString('en-IN')}</td><td>${e.joinDate||'—'}</td>
+    <td><span class="badge ${e.status==='active'?'bg':'bgr'}">${e.status}</span></td>
+    <td><div class="fr"><button class="btn bo bs" onclick="editEmp('${e.id}')">✏️</button><button class="btn bs" style="background:var(--danger-light);color:var(--danger);border:none;cursor:pointer" onclick="delEmp('${e.id}')">🗑</button></div></td>
+  </tr>`).join(''):'<tr><td colspan="7"><div class="es"><div class="ic">👥</div>No employees</div></td></tr>';
+}
+
+function popRepFlt(){const s=document.getElementById('rEmpF');if(!s)return;s.innerHTML='<option value="">All Employees</option>'+employees.map(e=>`<option value="${e.id}">${e.name}</option>`).join('');}
+function renderAttRep(){
+  const m=document.getElementById('rMonth')?.value;if(!m)return;
+  const ef=document.getElementById('rEmpF')?.value||'';
+  let rs=attendance.filter(a=>a.date.startsWith(m));if(ef)rs=rs.filter(a=>a.empId===ef);
+  rs.sort((a,b)=>b.date.localeCompare(a.date));
+  const tb=document.getElementById('aRTb');if(!tb)return;
+  tb.innerHTML=rs.length?rs.map(r=>{const e=employees.find(x=>x.id===r.empId);
+    return`<tr><td><div class="enc"><div class="av" style="background:${ec(e?.name||'?')}">${ini(e?.name||'?')}</div>${e?.name||'—'}</div></td><td>${r.date}</td><td>${r.checkIn}</td><td>${r.checkOut||'—'}</td><td>${cH(r.checkIn,r.checkOut)}</td><td><span class="badge ${r.checkOut?'bg':'bb'}">${r.checkOut?'Complete':'Partial'}</span></td></tr>`;}).join('')
+  :'<tr><td colspan="6"><div class="es"><div class="ic">📋</div>No records</div></td></tr>';
+}
+
+function openLv(isAdmin){
+  const s=document.getElementById('lf-emp');const row=document.getElementById('lfEmpRow');
+  if(isAdmin){row.style.display='';s.innerHTML=employees.filter(e=>e.status==='active').map(e=>`<option value="${e.id}">${e.name}</option>`).join('');}
+  else{row.style.display='none';s.innerHTML=`<option value="${cu.empId}">Me</option>`;}
+  document.getElementById('lf-from').value=tod();document.getElementById('lf-to').value=tod();
+  document.getElementById('lf-reason').value='';document.getElementById('mLeave').classList.add('open');
+}
+function saveLeave(){
+  const empId=document.getElementById('lf-emp').value;
+  const from=document.getElementById('lf-from').value,to=document.getElementById('lf-to').value;
+  if(!from||!to)return toast('Fill all fields','error');if(from>to)return toast('Invalid dates','error');
+  leaves.push({id:uid(),empId,type:document.getElementById('lf-type').value,from,to,days:dB(from,to),reason:document.getElementById('lf-reason').value.trim(),status:'pending'});
+  save();cm('mLeave');toast('Leave submitted');
+  const an=document.querySelector('.nav-item.active');if(an)showPg(an.id.replace('ni-',''));
+}
+function updLv(id,st){const l=leaves.find(x=>x.id===id);if(l){l.status=st;save();renderALv();toast('Leave '+st);}}
+function delLv(id){if(!confirm('Delete?'))return;leaves=leaves.filter(l=>l.id!==id);save();renderALv();toast('Deleted');}
+function renderALv(){
+  const tb=document.getElementById('aLTb');if(!tb)return;
+  const s=[...leaves].reverse();
+  tb.innerHTML=s.length?s.map(l=>{const e=employees.find(x=>x.id===l.empId);const b=l.status==='approved'?'bg':l.status==='rejected'?'br':'bw';
+    return`<tr><td><div class="enc"><div class="av" style="background:${ec(e?.name||'?')}">${ini(e?.name||'?')}</div>${e?.name||'—'}</div></td><td>${l.type}</td><td>${l.from}</td><td>${l.to}</td><td>${l.days}</td><td class="tm">${l.reason||'—'}</td><td><span class="badge ${b}">${l.status}</span></td>
+    <td><div class="fr">${l.status==='pending'
+      ?`<button class="btn bs" style="background:var(--accent-light);color:var(--accent);border:none;cursor:pointer" onclick="updLv('${l.id}','approved')">✓</button><button class="btn bs" style="background:var(--danger-light);color:var(--danger);border:none;cursor:pointer" onclick="updLv('${l.id}','rejected')">✗</button>`
+      :`<button class="btn bo bs" onclick="delLv('${l.id}')">🗑</button>`}</div></td></tr>`;}).join('')
+  :'<tr><td colspan="8"><div class="es"><div class="ic">🌿</div>No requests</div></td></tr>';
+}
+
+function renderASal(){
+  const m=document.getElementById('salM')?.value;if(!m)return;
+  const wd=getWD(m),ae=employees.filter(e=>e.status==='active');
+  const tb=document.getElementById('sTb');if(!tb)return;
+  tb.innerHTML=ae.length?ae.map(e=>{const p=attendance.filter(a=>a.empId===e.id&&a.date.startsWith(m)).length;const d=Math.max(0,(wd-p)*(e.salary/wd));const n=e.salary-d;
+    return`<tr><td><div class="enc"><div class="av" style="background:${ec(e.name)}">${ini(e.name)}</div>${e.name}</div></td><td>₹${e.salary.toLocaleString('en-IN')}</td><td>${wd}</td><td>${p}</td><td style="color:var(--danger)">₹${Math.round(d).toLocaleString('en-IN')}</td><td style="font-weight:600">₹${Math.round(n).toLocaleString('en-IN')}</td><td><button class="btn bo bs" onclick="showSlip('${e.id}','${m}',${wd})">📄 Slip</button></td></tr>`;}).join('')
+  :'<tr><td colspan="7"><div class="es">No employees</div></td></tr>';
+}
+function showSlip(eid,m,wd){
+  const e=employees.find(x=>x.id===eid);if(!e)return;
+  const p=attendance.filter(a=>a.empId===eid&&a.date.startsWith(m)).length;
+  const d=Math.max(0,(wd-p)*(e.salary/wd)),n=e.salary-d;
+  const[yr,mo]=m.split('-');const mN=new Date(parseInt(yr),parseInt(mo)-1).toLocaleString('en-IN',{month:'long',year:'numeric'});
+  document.getElementById('salSlip').innerHTML=`<div style="text-align:center;margin-bottom:20px"><div style="font-family:'DM Serif Display',serif;font-size:22px">${e.name}</div><div class="tm ts">${e.position} · ${e.dept}</div><div style="margin-top:6px;font-size:13px;color:var(--text2)">Salary Slip — ${mN}</div></div>
+  <div class="sr"><span>Basic Salary</span><span>₹${e.salary.toLocaleString('en-IN')}</span></div><div class="sr"><span>Working Days</span><span>${wd}</span></div><div class="sr"><span>Days Present</span><span style="color:var(--accent)">${p}</span></div><div class="sr"><span>Days Absent</span><span style="color:var(--danger)">${wd-p}</span></div><div class="sr" style="color:var(--danger)"><span>Deductions</span><span>−₹${Math.round(d).toLocaleString('en-IN')}</span></div><div class="dv"></div><div class="sr tot"><span>Net Payable</span><span style="color:var(--accent)">₹${Math.round(n).toLocaleString('en-IN')}</span></div>`;
+  document.getElementById('mSal').classList.add('open');
+}
+
+// ════════════════ REPORTS ════════════════
+function swTab(t){
+  activeTab=t;
+  ['monthly','employee','leave','salary'].forEach(x=>{
+    document.getElementById('rt-'+x)?.classList.toggle('active',x===t);
+    const el=document.getElementById('rp-'+x);if(el)el.style.display=x===t?'block':'none';
+  });renderRpts();
+}
+function renderRpts(){
+  if(activeTab==='monthly')renderMRpt();
+  else if(activeTab==='employee'){bldEmpRepSel();renderERpt();}
+  else if(activeTab==='leave')renderLRpt();
+  else renderSRpt();
+}
+
+function donut(segs){
+  const tot=segs.reduce((s,x)=>s+x.value,0);if(!tot)return'<div class="es">No data</div>';
+  const r=60,cx=80,cy=80,sw=22,circ=2*Math.PI*r;let off=0,paths='';
+  for(const sg of segs){const pct=sg.value/tot,dash=pct*circ;paths+=`<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="${sg.color}" stroke-width="${sw}" stroke-dasharray="${dash} ${circ-dash}" stroke-dashoffset="${circ*.25-off}" transform="rotate(-90 ${cx} ${cy})"/>`;off+=dash;}
+  const leg=segs.map(s=>`<span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:${s.color};margin-right:5px"></span>${s.label}: ${s.value}</span>`).join('');
+  return`<div style="display:flex;flex-direction:column;align-items:center;gap:12px"><svg width="160" height="160" viewBox="0 0 160 160"><circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="var(--surface2)" stroke-width="${sw}"/>${paths}<text x="${cx}" y="${cy}" text-anchor="middle" dominant-baseline="middle" font-size="18" font-family="DM Serif Display,serif" fill="var(--text)">${Math.round(segs[0].value/tot*100)}%</text><text x="${cx}" y="${cy+18}" text-anchor="middle" font-size="10" fill="var(--text2)">present</text></svg><div style="display:flex;gap:14px;flex-wrap:wrap;justify-content:center;font-size:12.5px">${leg}</div></div>`;
+}
+
+function renderMRpt(){
+  const m=document.getElementById('rptM')?.value;if(!m)return;
+  const[yr,mo]=m.split('-').map(Number),dim=new Date(yr,mo,0).getDate(),wd=getWD(m);
+  const ae=employees.filter(e=>e.status==='active'),mr=attendance.filter(a=>a.date.startsWith(m));
+  const tp=wd*ae.length,pres=mr.length,abs=Math.max(0,tp-pres),avg=tp>0?Math.round(pres/tp*100):0;
+  const el=document.getElementById('rp-monthly');if(!el)return;
+  const days=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  let dailyRows='';for(let d=1;d<=dim;d++){const ds=`${m}-${String(d).padStart(2,'0')}`;const dow=new Date(yr,mo-1,d).getDay();if(!dow||dow===0)continue;const pr=attendance.filter(a=>a.date===ds).length;const ab2=Math.max(0,ae.length-pr);const pct=ae.length>0?Math.round(pr/ae.length*100):0;const col=pct>=90?'var(--accent)':pct>=70?'var(--warn)':'var(--danger)';dailyRows+=`<tr><td>${ds}</td><td>${days[dow]}</td><td style="color:var(--accent)">${pr}</td><td style="color:var(--danger)">${ab2}</td><td style="color:${col};font-weight:500">${pct}%</td></tr>`;}
+  el.innerHTML=`<div class="sg"><div class="sc g"><div class="sl">Total Present</div><div class="sv">${pres}</div></div><div class="sc r"><div class="sl">Total Absent</div><div class="sv">${abs}</div></div><div class="sc b"><div class="sl">Avg Attendance</div><div class="sv">${avg}%</div></div><div class="sc w"><div class="sl">Working Days</div><div class="sv">${wd}</div></div></div>
+  <div class="g2 mb24"><div class="card"><div class="card-title">Attendance Rate</div>${ae.map(e=>{const cnt=mr.filter(a=>a.empId===e.id).length;const pct=wd>0?Math.round(cnt/wd*100):0;const col=pct>=90?'var(--accent)':pct>=70?'var(--warn)':'var(--danger)';return`<div class="br-row"><div class="br-lbl">${e.name.split(' ')[0]}</div><div class="br-trk"><div class="br-fill" style="width:${pct}%;background:${col}"></div></div><div class="br-pct">${pct}%</div></div>`;}).join('')||'<div class="es">No data</div>'}</div>
+  <div class="card"><div class="card-title">Overview</div>${donut([{label:'Present',value:pres,color:'var(--accent)'},{label:'Absent',value:abs,color:'var(--danger)'}])}</div></div>
+  <div class="card"><div class="card-title">Daily Log</div><div class="tw"><table><thead><tr><th>Date</th><th>Day</th><th>Present</th><th>Absent</th><th>Rate</th></tr></thead><tbody>${dailyRows||'<tr><td colspan="5"><div class="es">No data</div></td></tr>'}</tbody></table></div></div>`;
+}
+
+function bldEmpRepSel(){
+  const el=document.getElementById('rp-employee');if(!el)return;
+  const cur=el.querySelector('#erpSel')?.value||'';
+  el.innerHTML=`<div class="fr mb16"><select id="erpSel" onchange="renderERpt()" style="padding:8px 12px;width:220px"><option value="">Select Employee</option>${employees.map(e=>`<option value="${e.id}"${e.id===cur?' selected':''}>${e.name}</option>`).join('')}</select></div><div id="erpOut"></div>`;
+}
+function renderERpt(){
+  const m=document.getElementById('rptM')?.value,empId=document.getElementById('erpSel')?.value;
+  const out=document.getElementById('erpOut');if(!out)return;
+  if(!empId){out.innerHTML='<div class="es">Select an employee above</div>';return;}
+  const wd=getWD(m),recs=attendance.filter(a=>a.empId===empId&&a.date.startsWith(m));
+  const p=recs.length,ab=Math.max(0,wd-p),rate=wd>0?Math.round(p/wd*100):0;
+  const ald=leaves.filter(l=>l.empId===empId&&l.status==='approved'&&(l.from.startsWith(m)||l.to.startsWith(m))).reduce((s,l)=>s+l.days,0);
+  out.innerHTML=`<div class="sg"><div class="sc g"><div class="sl">Present</div><div class="sv">${p}</div><div class="ss">of ${wd}</div></div><div class="sc r"><div class="sl">Absent</div><div class="sv">${ab}</div></div><div class="sc b"><div class="sl">Rate</div><div class="sv">${rate}%</div></div><div class="sc w"><div class="sl">Leave Days</div><div class="sv">${ald}</div></div></div>
+  <div class="card mb24"><div class="card-title">Calendar</div>${mkCal(m,empId)}</div>
+  <div class="card"><div class="card-title">Detail</div><div class="tw"><table><thead><tr><th>Date</th><th>Check In</th><th>Check Out</th><th>Hours</th><th>Status</th></tr></thead><tbody>${[...recs].sort((a,b)=>b.date.localeCompare(a.date)).map(r=>`<tr><td>${r.date}</td><td>${r.checkIn}</td><td>${r.checkOut||'—'}</td><td>${cH(r.checkIn,r.checkOut)}</td><td><span class="badge ${r.checkOut?'bg':'bb'}">${r.checkOut?'Complete':'Partial'}</span></td></tr>`).join('')||'<tr><td colspan="5"><div class="es">No records</div></td></tr>'}</tbody></table></div></div>`;
+}
+
+function renderLRpt(){
+  const m=document.getElementById('rptM')?.value;
+  const ml=m?leaves.filter(l=>l.from.startsWith(m)||l.to.startsWith(m)):leaves;
+  const pend=ml.filter(l=>l.status==='pending').length,app=ml.filter(l=>l.status==='approved').length,rej=ml.filter(l=>l.status==='rejected').length;
+  const td2=ml.filter(l=>l.status==='approved').reduce((s,l)=>s+l.days,0);
+  const el=document.getElementById('rp-leave');if(!el)return;
+  const types=['Sick Leave','Casual Leave','Annual Leave','Maternity Leave','Emergency Leave','Other'];
+  const tcols=['var(--danger)','var(--blue)','var(--accent)','var(--warn)','#6B3FA0','#6B6558'];
+  const mxT=Math.max(1,...types.map(t=>ml.filter(l=>l.type===t).length));
+  const mxE=Math.max(1,...employees.map(e=>ml.filter(l=>l.empId===e.id).length));
+  el.innerHTML=`<div class="sg"><div class="sc w"><div class="sl">Pending</div><div class="sv">${pend}</div></div><div class="sc g"><div class="sl">Approved</div><div class="sv">${app}</div></div><div class="sc r"><div class="sl">Rejected</div><div class="sv">${rej}</div></div><div class="sc b"><div class="sl">Total Days</div><div class="sv">${td2}</div><div class="ss">approved</div></div></div>
+  <div class="g2 mb24">
+    <div class="card"><div class="card-title">By Leave Type</div>${types.map((t,i)=>{const c=ml.filter(l=>l.type===t).length;return`<div class="br-row"><div class="br-lbl">${t}</div><div class="br-trk"><div class="br-fill" style="width:${Math.round(c/mxT*100)}%;background:${tcols[i]}"></div></div><div class="br-pct">${c}</div></div>`;}).join('')}</div>
+    <div class="card"><div class="card-title">By Employee</div>${employees.map(e=>{const c=ml.filter(l=>l.empId===e.id).length;return`<div class="br-row"><div class="br-lbl">${e.name.split(' ')[0]}</div><div class="br-trk"><div class="br-fill" style="width:${Math.round(c/mxE*100)}%;background:${ec(e.name)}"></div></div><div class="br-pct">${c}</div></div>`;}).join('')}</div>
+  </div>
+  <div class="card"><div class="card-title">Leave Details</div><div class="tw"><table><thead><tr><th>Employee</th><th>Type</th><th>From</th><th>To</th><th>Days</th><th>Status</th></tr></thead><tbody>${[...ml].reverse().map(l=>{const e=employees.find(x=>x.id===l.empId);const b=l.status==='approved'?'bg':l.status==='rejected'?'br':'bw';return`<tr><td><div class="enc"><div class="av" style="background:${ec(e?.name||'?')}">${ini(e?.name||'?')}</div>${e?.name||'—'}</div></td><td>${l.type}</td><td>${l.from}</td><td>${l.to}</td><td>${l.days}</td><td><span class="badge ${b}">${l.status}</span></td></tr>`;}).join('')||'<tr><td colspan="6"><div class="es">No records</div></td></tr>'}</tbody></table></div></div>`;
+}
+
+function renderSRpt(){
+  const m=document.getElementById('rptM')?.value;if(!m)return;
+  const wd=getWD(m),ae=employees.filter(e=>e.status==='active'),mr=attendance.filter(a=>a.date.startsWith(m));
+  const ed=ae.map(e=>{const p=mr.filter(a=>a.empId===e.id).length,d=Math.max(0,(wd-p)*(e.salary/wd)),n=e.salary-d;return{e,p,d,n};});
+  const tb2=ae.reduce((s,e)=>s+e.salary,0),tn=ed.reduce((s,d)=>s+d.n,0),tdx=ed.reduce((s,d)=>s+d.d,0),ar=ae.length>0?Math.round(ed.reduce((s,d)=>s+(d.p/wd),0)/ae.length*100):0;
+  const el=document.getElementById('rp-salary');if(!el)return;
+  const mn=Math.max(1,...ed.map(d=>d.e.salary));
+  el.innerHTML=`<div class="sg"><div class="sc b"><div class="sl">Total Base</div><div class="sv" style="font-size:22px">₹${Math.round(tb2/1000)}K</div></div><div class="sc g"><div class="sl">Total Net</div><div class="sv" style="font-size:22px">₹${Math.round(tn/1000)}K</div></div><div class="sc r"><div class="sl">Deductions</div><div class="sv" style="font-size:22px">₹${Math.round(tdx/1000)}K</div></div><div class="sc w"><div class="sl">Avg Attendance</div><div class="sv">${ar}%</div></div></div>
+  <div class="card mb24"><div class="card-title">Net Salary Breakdown</div>${ed.map(({e,d,n})=>{const pb=Math.round(e.salary/mn*100),pn2=Math.round(n/mn*100);return`<div class="br-row" style="margin-bottom:14px"><div class="br-lbl">${e.name.split(' ')[0]}</div><div style="flex:1"><div style="display:flex;align-items:center;gap:6px;margin-bottom:4px"><div class="br-trk" style="flex:1"><div class="br-fill" style="width:${pb}%;background:var(--surface2);border:1px solid var(--border)"></div></div><span style="font-size:11px;color:var(--text2);width:80px">Base ₹${Math.round(e.salary/1000)}K</span></div><div style="display:flex;align-items:center;gap:6px"><div class="br-trk" style="flex:1"><div class="br-fill" style="width:${pn2}%;background:var(--accent)"></div></div><span style="font-size:11px;color:var(--accent);width:80px">Net ₹${Math.round(n/1000)}K</span></div></div></div>`;}).join('')}</div>
+  <div class="card"><div class="card-title">Salary Summary</div><div class="tw"><table><thead><tr><th>Employee</th><th>Dept</th><th>Base</th><th>Present</th><th>Deductions</th><th>Net Salary</th><th>Rate</th></tr></thead><tbody>${ed.map(({e,p,d,n})=>{const rt=wd>0?Math.round(p/wd*100):0;const b=rt>=90?'bg':rt>=70?'bw':'br';return`<tr><td><div class="enc"><div class="av" style="background:${ec(e.name)}">${ini(e.name)}</div>${e.name}</div></td><td>${e.dept}</td><td>₹${e.salary.toLocaleString('en-IN')}</td><td>${p}/${wd}</td><td style="color:var(--danger)">₹${Math.round(d).toLocaleString('en-IN')}</td><td style="font-weight:600;color:var(--accent)">₹${Math.round(n).toLocaleString('en-IN')}</td><td><span class="badge ${b}">${rt}%</span></td></tr>`;}).join('')}</tbody></table></div></div>`;
+}
+
+// ════════════════ EMPLOYEE RENDER ════════════════
+function myE(){return employees.find(e=>e.id===cu?.empId);}
+
+function mkCal(month,empId){
+  const[yr,mo]=month.split('-').map(Number),dim=new Date(yr,mo,0).getDate(),fdow=new Date(yr,mo-1,1).getDay();
+  const recs=attendance.filter(a=>a.empId===empId&&a.date.startsWith(month));
+  const pSet=new Set(recs.map(r=>r.date));
+  const lSet=new Set();
+  leaves.filter(l=>l.empId===empId&&l.status==='approved').forEach(l=>{let c=new Date(l.from);const en=new Date(l.to);while(c<=en){lSet.add(c.toISOString().split('T')[0]);c.setDate(c.getDate()+1);}});
+  let h='<div class="cg">';
+  ['Su','Mo','Tu','We','Th','Fr','Sa'].forEach(d=>h+=`<div class="cdh">${d}</div>`);
+  for(let i=0;i<fdow;i++)h+='<div class="cday empty"></div>';
+  for(let d=1;d<=dim;d++){const ds=`${month}-${String(d).padStart(2,'0')}`;const dow=new Date(yr,mo-1,d).getDay();
+    let cls='cday';
+    if(!dow||dow===0)cls+=' weekend';else if(lSet.has(ds))cls+=' leave';else if(pSet.has(ds))cls+=' present';else cls+=' absent';
+    h+=`<div class="${cls}">${d}</div>`;}
+  h+='</div><div style="display:flex;gap:12px;margin-top:10px;font-size:12px;flex-wrap:wrap">';
+  [['present','Present'],['absent','Absent'],['leave','On Leave'],['weekend','Weekend']].forEach(([c,l])=>h+=`<span><span style="display:inline-block;width:12px;height:12px;border-radius:3px;vertical-align:middle;margin-right:4px" class="cday ${c}"></span>${l}</span>`);
+  return h+'</div>';
+}
+
+function renderEDash(){
+  const e=myE();if(!e)return;
+  const m=cM(),wd=getWD(m),recs=attendance.filter(a=>a.empId===e.id&&a.date.startsWith(m));
+  const p=recs.length,ab=Math.max(0,wd-p),rate=wd>0?Math.round(p/wd*100):0;
+  const ald=leaves.filter(l=>l.empId===e.id&&l.status==='approved').reduce((s,l)=>s+l.days,0);
+  document.getElementById('ep-p').textContent=p;document.getElementById('ep-a').textContent=ab;
+  document.getElementById('ep-r').textContent=rate+'%';document.getElementById('ep-l').textContent=Math.max(0,24-ald);
+  document.getElementById('eCal').innerHTML=mkCal(m,e.id);
+  document.getElementById('eRL').innerHTML=[...leaves.filter(l=>l.empId===e.id)].reverse().slice(0,5)
+    .map(l=>{const b=l.status==='approved'?'bg':l.status==='rejected'?'br':'bw';return`<div class="sr"><div><div style="font-weight:500">${l.type}</div><div class="ts tm">${l.from} → ${l.to} (${l.days}d)</div></div><span class="badge ${b}">${l.status}</span></div>`;}).join('')
+    ||'<div class="es"><div class="ic">🌿</div>No leaves yet</div>';
+}
+
+function renderECI(){
+  const e=myE();if(!e)return;
+  const r=attendance.find(a=>a.empId===e.id&&a.date===tod());
+  const info=document.getElementById('eCIInfo');
+  if(r)info.innerHTML=r.checkOut?`<span style="color:var(--accent)">✅ In: ${r.checkIn} · Out: ${r.checkOut}</span>`:`<span style="color:var(--blue)">🟢 Active since ${r.checkIn}</span>`;
+  else info.innerHTML=`<span style="color:var(--text2)">Not yet checked in today</span>`;
+  const tb=document.getElementById('eCITb');if(tb)tb.innerHTML=r
+    ?`<tr><td>${r.date}</td><td>${r.checkIn}</td><td>${r.checkOut||'—'}</td><td>${cH(r.checkIn,r.checkOut)}</td><td><span class="badge ${r.checkOut?'bg':'bb'}">${r.checkOut?'Complete':'Active'}</span></td></tr>`
+    :'<tr><td colspan="5"><div class="es"><div class="ic">🕐</div>No record today</div></td></tr>';
+}
+function doECI(){const e=myE();if(!e)return;if(attendance.find(a=>a.empId===e.id&&a.date===tod()))return toast('Already checked in!','error');attendance.push({id:uid(),empId:e.id,date:tod(),checkIn:nT(),checkOut:null});save();renderECI();toast('Checked in at '+nT());}
+function doECO(){const e=myE();if(!e)return;const r=attendance.find(a=>a.empId===e.id&&a.date===tod()&&!a.checkOut);if(!r)return toast('No active check-in','error');r.checkOut=nT();save();renderECI();toast('Checked out at '+nT());}
+
+function renderEAtt(){
+  const e=myE();if(!e)return;
+  const m=document.getElementById('eaM')?.value;if(!m)return;
+  const wd=getWD(m),recs=attendance.filter(a=>a.empId===e.id&&a.date.startsWith(m));
+  const p=recs.length,ab=Math.max(0,wd-p),rate=wd>0?Math.round(p/wd*100):0;
+  const sg=document.getElementById('eaSg');if(sg)sg.innerHTML=`<div class="sc g"><div class="sl">Present</div><div class="sv">${p}</div></div><div class="sc r"><div class="sl">Absent</div><div class="sv">${ab}</div></div><div class="sc b"><div class="sl">Rate</div><div class="sv">${rate}%</div></div><div class="sc w"><div class="sl">Working Days</div><div class="sv">${wd}</div></div>`;
+  const cal=document.getElementById('eaCal');if(cal)cal.innerHTML=mkCal(m,e.id);
+  const tb=document.getElementById('eaTb');if(tb)tb.innerHTML=[...recs].sort((a,b)=>b.date.localeCompare(a.date)).map(r=>`<tr><td>${r.date}</td><td>${r.checkIn}</td><td>${r.checkOut||'—'}</td><td>${cH(r.checkIn,r.checkOut)}</td><td><span class="badge ${r.checkOut?'bg':'bb'}">${r.checkOut?'Complete':'Partial'}</span></td></tr>`).join('')||'<tr><td colspan="5"><div class="es">No records</div></td></tr>';
+}
+
+function renderELv(){
+  const e=myE();if(!e)return;
+  const tb=document.getElementById('eLTb');if(!tb)return;
+  tb.innerHTML=[...leaves.filter(l=>l.empId===e.id)].reverse().map(l=>{const b=l.status==='approved'?'bg':l.status==='rejected'?'br':'bw';
+    return`<tr><td>${l.type}</td><td>${l.from}</td><td>${l.to}</td><td>${l.days}</td><td class="tm">${l.reason||'—'}</td><td><span class="badge ${b}">${l.status}</span></td></tr>`;}).join('')
+  ||'<tr><td colspan="6"><div class="es"><div class="ic">🌿</div>No leave requests</div></td></tr>';
+}
+
+function renderESal(){
+  const e=myE();if(!e)return;
+  const m=document.getElementById('esM')?.value;if(!m)return;
+  const wd=getWD(m),p=attendance.filter(a=>a.empId===e.id&&a.date.startsWith(m)).length;
+  const d=Math.max(0,(wd-p)*(e.salary/wd)),n=e.salary-d,rate=wd>0?Math.round(p/wd*100):0;
+  const b=rate>=90?'bg':rate>=70?'bw':'br';
+  const sg=document.getElementById('esSg');if(sg)sg.innerHTML=`<div class="sc b"><div class="sl">Base Salary</div><div class="sv" style="font-size:24px">₹${e.salary.toLocaleString('en-IN')}</div></div><div class="sc g"><div class="sl">Net Payable</div><div class="sv" style="font-size:24px">₹${Math.round(n).toLocaleString('en-IN')}</div></div><div class="sc r"><div class="sl">Deductions</div><div class="sv" style="font-size:24px">₹${Math.round(d).toLocaleString('en-IN')}</div></div><div class="sc w"><div class="sl">Attendance</div><div class="sv">${rate}%</div><div class="ss"><span class="badge ${b}">${p}/${wd} days</span></div></div>`;
+  const[yr,mo2]=m.split('-');const mN=new Date(parseInt(yr),parseInt(mo2)-1).toLocaleString('en-IN',{month:'long',year:'numeric'});
+  const sl=document.getElementById('esSlip');if(sl)sl.innerHTML=`<div class="card-title">Salary Slip — ${mN}</div><div class="sr"><span>Employee</span><span style="font-weight:500">${e.name}</span></div><div class="sr"><span>Department</span><span>${e.dept}</span></div><div class="sr"><span>Position</span><span>${e.position}</span></div><div class="dv"></div><div class="sr"><span>Basic Salary</span><span>₹${e.salary.toLocaleString('en-IN')}</span></div><div class="sr"><span>Working Days</span><span>${wd}</span></div><div class="sr"><span>Present</span><span style="color:var(--accent)">${p}</span></div><div class="sr"><span>Absent</span><span style="color:var(--danger)">${wd-p}</span></div><div class="sr" style="color:var(--danger)"><span>Deductions</span><span>−₹${Math.round(d).toLocaleString('en-IN')}</span></div><div class="dv"></div><div class="sr tot"><span>Net Payable</span><span style="color:var(--accent)">₹${Math.round(n).toLocaleString('en-IN')}</span></div>`;
+}
+
+function renderEPro(){
+  const e=myE();if(!e)return;
+  const el=document.getElementById('ePro');if(!el)return;
+  el.innerHTML=`<div class="ph"><div class="pav" style="background:${ec(e.name)}">${ini(e.name)}</div><div><div class="pn">${e.name}</div><div class="pm">${e.position} · ${e.dept}</div><span class="badge bg" style="margin-top:6px">${e.status}</span></div></div><div class="dv"></div><div class="ig"><div><div class="il">Email</div><div class="iv">${e.email}</div></div><div><div class="il">Phone</div><div class="iv">${e.phone||'—'}</div></div><div><div class="il">Department</div><div class="iv">${e.dept}</div></div><div><div class="il">Position</div><div class="iv">${e.position}</div></div><div><div class="il">Join Date</div><div class="iv">${e.joinDate||'—'}</div></div><div><div class="il">Base Salary</div><div class="iv">₹${e.salary.toLocaleString('en-IN')}</div></div></div>`;
+}
+</script>
+</body>
+</html>
